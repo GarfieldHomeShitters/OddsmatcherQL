@@ -33,6 +33,21 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="C1.Win.4.8, Version=4.8.20241.657, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL">
+          <HintPath>..\packages\C1.Win.8.0.20241.657\lib\net48\C1.Win.4.8.dll</HintPath>
+        </Reference>
+        <Reference Include="C1.Win.C1Command.4.8, Version=4.8.20241.657, Culture=neutral, PublicKeyToken=e808566f358766d8, processorArchitecture=MSIL">
+          <HintPath>..\packages\C1.Win.C1Command.4.8.20241.657\lib\net48\C1.Win.C1Command.4.8.dll</HintPath>
+        </Reference>
+        <Reference Include="C1.Win.C1Input.4.8, Version=4.8.20241.657, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL">
+          <HintPath>..\packages\C1.Win.C1Input.4.8.20241.657\lib\net48\C1.Win.C1Input.4.8.dll</HintPath>
+        </Reference>
+        <Reference Include="C1.Win.Input.MultiSelect.4.8, Version=4.8.20241.657, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+          <HintPath>..\packages\C1.Win.Input.MultiSelect.8.0.20241.657\lib\net48\C1.Win.Input.MultiSelect.4.8.dll</HintPath>
+        </Reference>
+        <Reference Include="C1.Win.TreeView.4.8, Version=4.8.20241.657, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+          <HintPath>..\packages\C1.Win.TreeView.8.0.20241.657\lib\net48\C1.Win.TreeView.4.8.dll</HintPath>
+        </Reference>
         <Reference Include="GraphQL.Client, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\GraphQL.Client.6.1.0\lib\net461\GraphQL.Client.dll</HintPath>
         </Reference>
@@ -63,17 +78,17 @@
         <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-          <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+        <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+          <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
         </Reference>
         <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.Extensions.DependencyInjection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-          <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+        <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+          <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-          <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+        <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+          <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
         </Reference>
         <Reference Include="Microsoft.Extensions.Http, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.Extensions.Http.6.0.0\lib\net461\Microsoft.Extensions.Http.dll</HintPath>
@@ -99,6 +114,39 @@
         <Reference Include="mscorlib" />
         <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
           <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="Sdl.MultiSelectComboBox, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a6f9048fb51b33ed, processorArchitecture=MSIL">
+          <HintPath>..\packages\Sdl.MultiSelectComboBox.1.0.77\lib\net48\Sdl.MultiSelectComboBox.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.Core.WinForms, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.Core.WinForms.26.1.40\lib\net462\Syncfusion.Core.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.DataSource.WinForms, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.DataSource.WinForms.26.1.40\lib\net462\Syncfusion.DataSource.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.GridCommon.WinForms, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.GridCommon.WinForms.26.1.40\lib\net462\Syncfusion.GridCommon.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.Licensing, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.Licensing.26.1.40\lib\net462\Syncfusion.Licensing.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.SfInput.WinForms">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Syncfusion.SfInput.WinForms\v4.0_26.1400.35.0__3d67ed1f87d44c89\Syncfusion.SfInput.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.SfInput.WinForms, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.SfInput.WinForms.26.1.40\lib\net462\Syncfusion.SfInput.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.SfListView.WinForms">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Syncfusion.SfListView.WinForms\v4.0_26.1400.35.0__3d67ed1f87d44c89\Syncfusion.SfListView.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.SfListView.WinForms, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.SfListView.WinForms.26.1.40\lib\net462\Syncfusion.SfListView.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.Shared.Base, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+          <HintPath>..\packages\Syncfusion.Shared.Base.26.1.40\lib\net462\Syncfusion.Shared.Base.dll</HintPath>
+        </Reference>
+        <Reference Include="Syncfusion.Tools.Windows">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Syncfusion.Tools.Windows\v4.0_26.1400.35.0__3d67ed1f87d44c89\Syncfusion.Tools.Windows.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -230,6 +278,11 @@
       <Content Include="Configs\WilliamHillQualFootball.json" />
       <Content Include="Configs\WilliamHillGenQualifying.json" />
       <Content Include="Configs\WilliamHillQualRacing.json" />
+      <Content Include="Default\availableBookmakers.txt" />
+      <Content Include="Default\availableSports.txt" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Datatypes\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
