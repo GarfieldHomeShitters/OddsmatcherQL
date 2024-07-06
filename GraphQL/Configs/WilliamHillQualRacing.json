@@ -1,0 +1,34 @@
+{
+  "ratingType": "rating",
+  "bookmaker": [
+    "William Hill"
+  ],
+  "exchange": [
+    "smarketsexchange"
+  ],
+  "permittedSports": [
+    "horseracing"
+  ],
+  "permittedMarketGroups": [
+    "win-market",
+    "match-odds",
+    "over-under",
+    "half-time-full-time",
+    "correct-score",
+    "both-teams-to-score"
+  ],
+  "minOdds": 1.5,
+  "maxOdds": null,
+  "minRating": null,
+  "maxRating": null,
+  "minLiquidity": null,
+  "timeframeStart": null,
+  "timeframeEnd": null,
+  "searchByEventName": null,
+  "excludeDraw": false,
+  "limit": 100,
+  "cap": 0,
+  "updatedWithinSeconds": 21600,
+  "skip": 0,
+  "permittedEventGroups": null
+}
