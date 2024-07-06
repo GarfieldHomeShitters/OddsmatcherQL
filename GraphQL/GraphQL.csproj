@@ -234,7 +234,16 @@
         <Reference Include="WindowsBase" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Datatypes\Back.cs" />
+        <Compile Include="Datatypes\BetSlip.cs" />
+        <Compile Include="Datatypes\Bookmaker.cs" />
+        <Compile Include="Datatypes\Data.cs" />
+        <Compile Include="Datatypes\EventGroup.cs" />
+        <Compile Include="Datatypes\Lay.cs" />
+        <Compile Include="Datatypes\MarketGroup.cs" />
+        <Compile Include="Datatypes\Match.cs" />
         <Compile Include="Datatypes\ReturnData.cs" />
+        <Compile Include="Datatypes\SportClass.cs" />
         <Compile Include="Oddsmatcher.cs">
             <SubType>Form</SubType>
         </Compile>
@@ -282,6 +291,9 @@
       <Content Include="Default\availableBookmakers.txt" />
       <Content Include="Default\availableSports.txt" />
       <Content Include="Default\baseQuery.txt" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Datatypes\Parsers\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
