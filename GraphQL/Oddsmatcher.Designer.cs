@@ -31,28 +31,28 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Oddsmatcher));
             this.tblMatchedResults = new System.Windows.Forms.DataGridView();
-            this.ConfigSelection = new System.Windows.Forms.ComboBox();
+            this.configSelection = new System.Windows.Forms.ComboBox();
             this.btnLoadConfig = new System.Windows.Forms.Button();
             this.multiBookmaker = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
             this.bookmakerDeselectButton = new System.Windows.Forms.Button();
             this.minOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.sportSelection = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
+            this.snrCheck = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ratingMaxNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.ratingMinNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.label1 = new System.Windows.Forms.Label();
             this.maxOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.quickCheckBoxReflectable1 = new Syncfusion.Windows.Forms.Tools.QuickCheckBoxReflectable();
-            this.snrCheck = new System.Windows.Forms.CheckBox();
-            this.sportSelection = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sportSelection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingMaxNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingMinNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sportSelection)).BeginInit();
             this.SuspendLayout();
             // 
             // tblMatchedResults
@@ -66,14 +66,14 @@
             this.tblMatchedResults.Size = new System.Drawing.Size(936, 521);
             this.tblMatchedResults.TabIndex = 0;
             // 
-            // ConfigSelection
+            // configSelection
             // 
-            this.ConfigSelection.FormattingEnabled = true;
-            this.ConfigSelection.Items.AddRange(new object[] { "--No Config--" });
-            this.ConfigSelection.Location = new System.Drawing.Point(12, 140);
-            this.ConfigSelection.Name = "ConfigSelection";
-            this.ConfigSelection.Size = new System.Drawing.Size(121, 21);
-            this.ConfigSelection.TabIndex = 1;
+            this.configSelection.FormattingEnabled = true;
+            this.configSelection.Items.AddRange(new object[] { "--No Config--" });
+            this.configSelection.Location = new System.Drawing.Point(12, 140);
+            this.configSelection.Name = "configSelection";
+            this.configSelection.Size = new System.Drawing.Size(121, 21);
+            this.configSelection.TabIndex = 1;
             // 
             // btnLoadConfig
             // 
@@ -155,6 +155,38 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(936, 121);
             this.panel1.TabIndex = 7;
+            // 
+            // sportSelection
+            // 
+            this.sportSelection.AutoSizeMode = Syncfusion.Windows.Forms.Tools.AutoSizeModes.None;
+            this.sportSelection.BackColor = System.Drawing.Color.White;
+            this.sportSelection.BeforeTouchSize = new System.Drawing.Size(243, 30);
+            this.sportSelection.ButtonStyle = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.sportSelection.DelimiterChar = ", ";
+            this.sportSelection.DisplayMode = Syncfusion.Windows.Forms.Tools.DisplayMode.DelimiterMode;
+            this.sportSelection.FlatBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.sportSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sportSelection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sportSelection.Location = new System.Drawing.Point(318, 18);
+            this.sportSelection.Name = "sportSelection";
+            this.sportSelection.ShowCheckBox = true;
+            this.sportSelection.Size = new System.Drawing.Size(243, 30);
+            this.sportSelection.TabIndex = 13;
+            this.sportSelection.ThemeName = "Metro";
+            this.sportSelection.ThemeStyle.FocusedBorderColor = System.Drawing.Color.Silver;
+            this.sportSelection.ThemeStyle.HoverBorderColor = System.Drawing.Color.Gray;
+            this.sportSelection.ThemeStyle.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.sportSelection.UseVisualStyle = true;
+            // 
+            // snrCheck
+            // 
+            this.snrCheck.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.snrCheck.Location = new System.Drawing.Point(852, 24);
+            this.snrCheck.Name = "snrCheck";
+            this.snrCheck.Size = new System.Drawing.Size(53, 24);
+            this.snrCheck.TabIndex = 12;
+            this.snrCheck.Text = "SnR";
+            this.snrCheck.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -243,37 +275,6 @@
             this.quickCheckBoxReflectable1.Size = new System.Drawing.Size(23, 23);
             this.quickCheckBoxReflectable1.Text = "quickCheckBoxReflectable1";
             // 
-            // snrCheck
-            // 
-            this.snrCheck.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.snrCheck.Location = new System.Drawing.Point(852, 24);
-            this.snrCheck.Name = "snrCheck";
-            this.snrCheck.Size = new System.Drawing.Size(53, 24);
-            this.snrCheck.TabIndex = 12;
-            this.snrCheck.Text = "SnR";
-            this.snrCheck.UseVisualStyleBackColor = true;
-            // 
-            // sportSelection
-            // 
-            this.sportSelection.AutoSizeMode = Syncfusion.Windows.Forms.Tools.AutoSizeModes.None;
-            this.sportSelection.BackColor = System.Drawing.Color.White;
-            this.sportSelection.BeforeTouchSize = new System.Drawing.Size(243, 30);
-            this.sportSelection.ButtonStyle = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            this.sportSelection.DelimiterChar = ", ";
-            this.sportSelection.DisplayMode = Syncfusion.Windows.Forms.Tools.DisplayMode.DelimiterMode;
-            this.sportSelection.FlatBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.sportSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.sportSelection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sportSelection.Location = new System.Drawing.Point(318, 18);
-            this.sportSelection.Name = "sportSelection";
-            this.sportSelection.ShowCheckBox = true;
-            this.sportSelection.Size = new System.Drawing.Size(243, 30);
-            this.sportSelection.TabIndex = 13;
-            this.sportSelection.ThemeName = "Metro";
-            this.sportSelection.ThemeStyle.FocusedBorderColor = System.Drawing.Color.Silver;
-            this.sportSelection.ThemeStyle.HoverBorderColor = System.Drawing.Color.Gray;
-            this.sportSelection.ThemeStyle.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            // 
             // Oddsmatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,7 +283,7 @@
             this.ClientSize = new System.Drawing.Size(960, 700);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoadConfig);
-            this.Controls.Add(this.ConfigSelection);
+            this.Controls.Add(this.configSelection);
             this.Controls.Add(this.tblMatchedResults);
             this.Name = "Oddsmatcher";
             this.Text = "Form1";
@@ -291,10 +292,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sportSelection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingMaxNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingMinNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sportSelection)).EndInit();
             this.ResumeLayout(false);
         }
 
@@ -322,7 +323,7 @@
 
         private System.Windows.Forms.Button btnLoadConfig;
 
-        private System.Windows.Forms.ComboBox ConfigSelection;
+        private System.Windows.Forms.ComboBox configSelection;
 
         private System.Windows.Forms.DataGridView tblMatchedResults;
 
