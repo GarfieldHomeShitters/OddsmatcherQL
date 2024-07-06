@@ -19,15 +19,15 @@ namespace GraphQL
     public partial class Oddsmatcher : Form
     {
         private readonly IGraphQLClient GraphQlClient;
-        private readonly DirectoryInfo configs;
+        private readonly FileInfo[] configs;
         private readonly string[] Bookmakers;
         private readonly string[] Sports;
         public Oddsmatcher()
         {
             // TODO: Make paths relative?? Not releasing so who really cared but for best practise.
-            configs = new DirectoryInfo("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs");
-            Bookmakers = File.ReadAllLines($"X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableBookmakers.txt");
-            Sports = File.ReadAllLines($"X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableSports.txt");
+            configs = new DirectoryInfo("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs").GetFiles("*.json");
+            Bookmakers = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableBookmakers.txt");
+            Sports = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableSports.txt");
             GraphQlClient = new GraphQLHttpClient("https://api.oddsplatform.profitaccumulator.com/graphql", new NewtonsoftJsonSerializer());
             InitializeComponent();
         }
@@ -35,13 +35,15 @@ namespace GraphQL
         private void Oddsmatcher_Load(object sender, EventArgs e)
         {
             foreach (var bookmaker in Bookmakers) multiBookmaker.Items.Add(bookmaker);
+            configSelection.DataSource = configs;
+            configSelection.DisplayMember = "Name";
         }
 
         private void bookmakerDeselectButton_Click(object sender, EventArgs e) { multiBookmaker.UnSelectAll(); }
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
-            
+            // TODO Parse configSelection.SelectedItem -> will return FileInfo for File
         }
         
         private void minOddsNumeric_ValueChanged(object sender, EventArgs e) { maxOddsNumeric.Minimum = minOddsNumeric.Value; }
