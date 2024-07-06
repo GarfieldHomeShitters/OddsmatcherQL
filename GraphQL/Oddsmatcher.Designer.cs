@@ -29,11 +29,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.tblMatchedResults = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // tblMatchedResults
+            // 
+            this.tblMatchedResults.AllowUserToAddRows = false;
+            this.tblMatchedResults.AllowUserToDeleteRows = false;
+            this.tblMatchedResults.AllowUserToOrderColumns = true;
+            this.tblMatchedResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tblMatchedResults.Location = new System.Drawing.Point(12, 68);
+            this.tblMatchedResults.Name = "tblMatchedResults";
+            this.tblMatchedResults.Size = new System.Drawing.Size(762, 370);
+            this.tblMatchedResults.TabIndex = 0;
+            // 
+            // Oddsmatcher
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tblMatchedResults);
+            this.Name = "Oddsmatcher";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
+            this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.DataGridView tblMatchedResults;
 
         #endregion
     }
