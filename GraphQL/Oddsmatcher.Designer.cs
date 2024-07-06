@@ -1,6 +1,6 @@
 ﻿namespace GraphQL
 {
-    partial class Form1
+    partial class Oddsmatcher
     {
         /// <summary>
         /// Required designer variable.
