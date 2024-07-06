@@ -42,6 +42,9 @@
         <Reference Include="GraphQL.Client.Abstractions.Websocket, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\GraphQL.Client.Abstractions.Websocket.6.1.0\lib\netstandard2.0\GraphQL.Client.Abstractions.Websocket.dll</HintPath>
         </Reference>
+        <Reference Include="GraphQL.Client.Serializer.Newtonsoft, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\GraphQL.Client.Serializer.Newtonsoft.6.1.0\lib\netstandard2.0\GraphQL.Client.Serializer.Newtonsoft.dll</HintPath>
+        </Reference>
         <Reference Include="GraphQL.Primitives, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\GraphQL.Primitives.6.1.0\lib\netstandard2.0\GraphQL.Primitives.dll</HintPath>
         </Reference>
@@ -94,6 +97,9 @@
           <HintPath>..\packages\Microsoft.Net.Http.Headers.2.1.1\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
         </Reference>
         <Reference Include="mscorlib" />
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+          <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+        </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -188,6 +194,9 @@
         </Compile>
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <EmbeddedResource Include="Oddsmatcher.resx">
+          <DependentUpon>Oddsmatcher.cs</DependentUpon>
+        </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -210,6 +219,17 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Configs\SkyBetFreeFootball.json" />
+      <Content Include="Configs\SkyBetFreeGeneral.json" />
+      <Content Include="Configs\SkyBetFreeRacing.json" />
+      <Content Include="Configs\SkyBetQualRacing.json" />
+      <Content Include="Configs\SkyBetGenQualifying.json" />
+      <Content Include="Configs\SkyBetQualFootball.json" />
+      <Content Include="Configs\WilliamHillQualFootball.json" />
+      <Content Include="Configs\WilliamHillGenQualifying.json" />
+      <Content Include="Configs\WilliamHillQualRacing.json" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
