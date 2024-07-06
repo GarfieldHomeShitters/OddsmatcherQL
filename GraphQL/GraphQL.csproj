@@ -234,6 +234,7 @@
         <Reference Include="WindowsBase" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Datatypes\ReturnData.cs" />
         <Compile Include="Oddsmatcher.cs">
             <SubType>Form</SubType>
         </Compile>
@@ -280,9 +281,7 @@
       <Content Include="Configs\WilliamHillQualRacing.json" />
       <Content Include="Default\availableBookmakers.txt" />
       <Content Include="Default\availableSports.txt" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Datatypes\" />
+      <Content Include="Default\baseQuery.txt" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
