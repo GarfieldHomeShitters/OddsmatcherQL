@@ -6,7 +6,7 @@
   "timeframeStart": null,
   "timeframeEnd": null,
   "searchByEventName": null,
-  "limit": 10,
+  "limit": 100,
   "cap": 200,
   "updatedWithinSeconds": 21600,
   "excludeDraw": false,
