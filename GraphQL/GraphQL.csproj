@@ -126,6 +126,9 @@
         <Reference Include="Syncfusion.Licensing, Version=26.1462.40.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
           <HintPath>..\packages\Syncfusion.Licensing.26.1.40\lib\net462\Syncfusion.Licensing.dll</HintPath>
         </Reference>
+        <Reference Include="Syncfusion.SfDataGrid.WinForms">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Syncfusion.SfDataGrid.WinForms\v4.0_26.1462.35.0__3d67ed1f87d44c89\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+        </Reference>
         <Reference Include="Syncfusion.SfInput.WinForms">
           <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Syncfusion.SfInput.WinForms\v4.0_26.1400.35.0__3d67ed1f87d44c89\Syncfusion.SfInput.WinForms.dll</HintPath>
         </Reference>

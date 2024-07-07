@@ -30,7 +30,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Oddsmatcher));
-            this.tblMatchedResults = new System.Windows.Forms.DataGridView();
             this.configSelection = new System.Windows.Forms.ComboBox();
             this.btnLoadConfig = new System.Windows.Forms.Button();
             this.multiBookmaker = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
@@ -46,7 +45,7 @@
             this.maxOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.quickCheckBoxReflectable1 = new Syncfusion.Windows.Forms.Tools.QuickCheckBoxReflectable();
             this.loadDataBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).BeginInit();
+            this.sfDataGrid1 = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).BeginInit();
             this.panel1.SuspendLayout();
@@ -54,18 +53,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxRatingNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRatingNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tblMatchedResults
-            // 
-            this.tblMatchedResults.AllowUserToAddRows = false;
-            this.tblMatchedResults.AllowUserToDeleteRows = false;
-            this.tblMatchedResults.AllowUserToOrderColumns = true;
-            this.tblMatchedResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tblMatchedResults.Location = new System.Drawing.Point(12, 167);
-            this.tblMatchedResults.Name = "tblMatchedResults";
-            this.tblMatchedResults.Size = new System.Drawing.Size(936, 521);
-            this.tblMatchedResults.TabIndex = 0;
             // 
             // configSelection
             // 
@@ -286,21 +275,30 @@
             this.loadDataBtn.UseVisualStyleBackColor = true;
             this.loadDataBtn.Click += new System.EventHandler(this.loadDataBtn_Click);
             // 
+            // sfDataGrid1
+            // 
+            this.sfDataGrid1.AccessibleName = "Table";
+            this.sfDataGrid1.AllowEditing = false;
+            this.sfDataGrid1.Location = new System.Drawing.Point(12, 167);
+            this.sfDataGrid1.Name = "sfDataGrid1";
+            this.sfDataGrid1.Size = new System.Drawing.Size(936, 521);
+            this.sfDataGrid1.TabIndex = 15;
+            this.sfDataGrid1.Text = "sfDataGrid1";
+            // 
             // Oddsmatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(960, 700);
+            this.Controls.Add(this.sfDataGrid1);
             this.Controls.Add(this.loadDataBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoadConfig);
             this.Controls.Add(this.configSelection);
-            this.Controls.Add(this.tblMatchedResults);
             this.Name = "Oddsmatcher";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Oddsmatcher_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -308,8 +306,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxRatingNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRatingNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid1)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid1;
 
         private System.Windows.Forms.Button loadDataBtn;
 
@@ -338,8 +339,6 @@
         private System.Windows.Forms.Button btnLoadConfig;
 
         private System.Windows.Forms.ComboBox configSelection;
-
-        private System.Windows.Forms.DataGridView tblMatchedResults;
 
         #endregion
     }
