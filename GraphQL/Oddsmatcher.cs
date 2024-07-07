@@ -17,6 +17,8 @@ namespace GraphQL
         private readonly FileInfo[] configs;
         private readonly string[] Bookmakers;
         private readonly string[] Sports;
+        private string[] selectedBookmakers;
+        private string[] selectedSports;
         private APIService ApiService;
         public Oddsmatcher()
         {
@@ -51,11 +53,13 @@ namespace GraphQL
 
         private async void loadDataBtn_Click(object sender, EventArgs e)
         {
-            tblMatchedResults.DataSource = null;
-            tblMatchedResults.Columns.Clear();
-            tblMatchedResults.Rows.Clear();
-            string[] selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[]{ };
-            string[] selectedSports = multiSport.SelectedItems.Count != 0 ? convertItemsToStringArray(multiSport.SelectedItems, Sports) : new string[] { };
+            // TODO: Add BindingSource for Data, Split function
+            // tblMatchedResults.DataSource = null;
+            // tblMatchedResults.Columns.Clear();
+            // tblMatchedResults.Rows.Clear();
+            
+            updateSelections();
+            
             GetBestMatch[] apiResponse = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked);
             List<MatchedEvent> matchedEvents = new List<MatchedEvent>();
             foreach (GetBestMatch bestMatch in apiResponse)
@@ -63,24 +67,15 @@ namespace GraphQL
                 MatchedEvent @event = new MatchedEvent(bestMatch);
                 matchedEvents.Add(@event);
             }
-            /*foreach (var Prop in matchedEvents.First().GetType().GetProperties())
-            {
-                tblMatchedResults.Columns.Add(Prop.Name, Prop.Name);
-            }
+            
+            // tblMatchedResults.DataSource = matchedEvents;
 
-            /*foreach (GetBestMatch matchedEvent in responseMatchList)
-            {
-                List<object> values = new List<object>();
-                foreach (var Prop in matchedEvent.GetType().GetProperties())
-                {
-                    values.Add(Prop.GetValue(matchedEvent));
-                }
+        }
 
-                tblMatchedResults.Rows.AddRange(values.ToArray());
-            }*/
-
-            tblMatchedResults.DataSource = matchedEvents;
-
+        private void updateSelections()
+        {
+            selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[]{ };
+            selectedSports = multiSport.SelectedItems.Count != 0 ? convertItemsToStringArray(multiSport.SelectedItems, Sports) : new string[] { };
         }
 
         private string[] convertItemsToStringArray(MultiSelectionComboBox.SelectedObjectCollection selectedObjects, string[] RefNames)
