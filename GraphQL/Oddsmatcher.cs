@@ -51,6 +51,7 @@ namespace GraphQL
 
         private async void loadDataBtn_Click(object sender, EventArgs e)
         {
+            tblMatchedResults.DataSource = null;
             tblMatchedResults.Columns.Clear();
             tblMatchedResults.Rows.Clear();
             string[] selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[]{ };
@@ -62,7 +63,7 @@ namespace GraphQL
                 MatchedEvent @event = new MatchedEvent(bestMatch);
                 matchedEvents.Add(@event);
             }
-            foreach (var Prop in matchedEvents.First().GetType().GetProperties())
+            /*foreach (var Prop in matchedEvents.First().GetType().GetProperties())
             {
                 tblMatchedResults.Columns.Add(Prop.Name, Prop.Name);
             }
