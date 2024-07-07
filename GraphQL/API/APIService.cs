@@ -44,8 +44,10 @@ namespace GraphQL.API
         {
             string defaultQueryVariables = File.ReadAllText("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs\\AllBookmakers.json");
             Dictionary<string, object> _Variables = JsonConvert.DeserializeObject<Dictionary<string, object>>(defaultQueryVariables);
+            
             Bookmakers = Bookmakers.Select(s => s.ToLowerInvariant()).ToArray();
             Array.Sort(Bookmakers);
+            
             _Variables["bookmaker"] = Bookmakers;
             _Variables["permittedSports"] = Sports;
             _Variables["minOdds"] = minOdds.ToString("0.##");
@@ -53,7 +55,6 @@ namespace GraphQL.API
             _Variables["minRating"] = minRating.ToString("0.##");
             _Variables["maxRating"] = maxRating.ToString("0.##");
             _Variables["cap"] = (int)Math.Floor(maxRating);
-            //string finalQueryVariables = JsonConvert.SerializeObject(_Variables);
             
             GraphQLRequest APIRequest = new GraphQLRequest
             {
@@ -62,11 +63,8 @@ namespace GraphQL.API
                 Query = File.ReadAllText("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\baseQuery.txt")
                 
             };
-            string test = JsonConvert.SerializeObject(APIRequest);
-            MessageBox.Show("hi");
-            var apiResponse = await GraphQlClient.SendQueryAsync<Data>(APIRequest);
-            var responseData = apiResponse.Data;
             
+            var apiResponse = await GraphQlClient.SendQueryAsync<Data>(APIRequest);
             if (apiResponse.Errors != null)
             {
                 foreach (var error in apiResponse.Errors)
@@ -75,9 +73,6 @@ namespace GraphQL.API
                 }
                 return new GetBestMatch[]{}; // Just return no data here.
             }
-            // Note: this looks weird, but the apiResponse.Data is class ReturnData which has child class Data.
-            
-            //var datatoreturn = JsonConvert.DeserializeObject<ReturnData>(apiResponse.Data).Data;
             return apiResponse.Data.GetBestMatches;
         }
         
