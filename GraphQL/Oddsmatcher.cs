@@ -87,14 +87,14 @@ namespace GraphQL
             }
 
             // Update filtered results if need be.
-            if (shouldApplyFilters)
-            {
+            if (shouldApplyFilters) {
                 applyFilters();
             }
-            else
-            {
+            else {
                 filteredMatchedEvents = unfilteredMatchedEvents.ToList();
             }
+
+            tblMatchedResults.DataSource = filteredMatchedEvents;
         }
 
         private void updateSelections()
@@ -125,6 +125,8 @@ namespace GraphQL
                 .Where(x => x.liability <= maxLiabilityNumeric.Value)
                 .Where(y => y.profitLoss >= -maxLossNumeric.Value)
                 .ToList();
+
+            tblMatchedResults.DataSource = filteredMatchedEvents;
         }
 
         private void applyFilterBtn_Click(object sender, EventArgs e)
