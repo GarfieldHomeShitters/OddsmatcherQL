@@ -12,14 +12,14 @@ namespace GraphQL.Datatypes
         public decimal layOdds { get; private set; }
         public decimal rating { get; private set; }
         public decimal snrRating { get; private set; }
-        public decimal profitLossQual { get; private set; }
-        public decimal profitLossSnR { get; private set; }
-        public decimal stakeQual { get; private set; }
-        public decimal stakeSnR { get; private set; }
-        public decimal liabilityQual { get; private set; }
-        public decimal liabilitySnR { get; private set; }
+        public decimal backStake { get; private set; }
+        public decimal profitLoss { get; private set; }
+        public decimal liability { get; private set; }
+        public decimal exchangeStake { get; private set; }
+        private decimal backReturn { get; set; }
+        private bool SnR { get; set; }
 
-        public MatchedEvent(GetBestMatch bestMatch, decimal backStake = 5.00m)
+        public MatchedEvent(GetBestMatch bestMatch, bool isSnR, decimal backStake = 5.00m)
         {
             startAt = DateTime.TryParse(bestMatch.StartAt, out DateTime parsedDate) ? parsedDate : DateTime.Now;
             eventName = bestMatch.EventName;
@@ -29,15 +29,35 @@ namespace GraphQL.Datatypes
             layOdds = decimal.TryParse(bestMatch.Lay.Odds, out decimal parsedLayOdds) ? parsedLayOdds : bestMatch.Lay.Odds.Length;
             rating = decimal.TryParse(bestMatch.Rating, out decimal parsedRating) ? parsedRating : bestMatch.Rating.GetHashCode(); // Again not a scoobie but hey ho
             snrRating = decimal.TryParse(bestMatch.Snr, out decimal parsedSnR) ? parsedSnR : bestMatch.Snr.GetHashCode();
+            this.backStake = backStake;
+            SnR = isSnR;
 
-            decimal backReturnQual = backOdds * backStake;
-            decimal backReturnSnR = backReturnQual - backStake;
-            liabilityQual = (backReturnQual * layOdds - backReturnQual) / layOdds;
-            liabilitySnR = (backReturnSnR * layOdds - backReturnSnR) / layOdds;
-            stakeQual = liabilityQual / (layOdds - 1);
-            stakeSnR = liabilitySnR / (layOdds - 1);
-            profitLossQual = backReturnQual - backStake - liabilityQual;
-            profitLossSnR = backReturnQual - liabilityQual;
+            calculateValues();
+        }
+
+        public void calculateValues(decimal backStake = 5.00m)
+        {
+            this.backStake = backStake;
+            calculateReturn();
+            calculateStakeAndLiability();
+            calculateProfitLoss();
+        }
+
+        void calculateReturn()
+        {
+            decimal tempRet = backOdds * backStake;
+            backReturn = SnR ? tempRet - backStake : tempRet;
+        }
+
+        void calculateStakeAndLiability()
+        {
+            liability = (backReturn * layOdds - backReturn) / layOdds;
+            exchangeStake = liability / (layOdds - 1);
+        }
+
+        void calculateProfitLoss()
+        {
+            profitLoss = SnR ? backReturn - liability : backReturn - backStake - liability;
         }
     }
 }
