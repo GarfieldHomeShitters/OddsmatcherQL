@@ -13,13 +13,16 @@ namespace GraphQL
 {
     public partial class Oddsmatcher : Form
     {
-
         private readonly FileInfo[] configs;
         private readonly string[] Bookmakers;
         private readonly string[] Sports;
         private string[] selectedBookmakers;
         private string[] selectedSports;
         private APIService ApiService;
+        private List<MatchedEvent> unfilteredMatchedEvents;
+        private List<MatchedEvent> filteredMatchedEvents;
+        private bool shouldApplyFilters;
+
         public Oddsmatcher()
         {
             // TODO: Make paths relative?? Not releasing so who really cared but for best practise.
@@ -27,7 +30,7 @@ namespace GraphQL
             configs = new DirectoryInfo("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs").GetFiles("*.json");
             Bookmakers = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableBookmakers.txt");
             Sports = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableSports.txt");
-            
+
             InitializeComponent();
         }
 
@@ -39,42 +42,64 @@ namespace GraphQL
             configSelection.DisplayMember = "Name";
         }
 
-        private void bookmakerDeselectButton_Click(object sender, EventArgs e) { multiBookmaker.UnSelectAll(); }
+        private void bookmakerDeselectButton_Click(object sender, EventArgs e)
+        {
+            multiBookmaker.UnSelectAll();
+        }
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
             // TODO Parse configSelection.SelectedItem -> will return FileInfo for File
         }
-        
-        private void minOddsNumeric_ValueChanged(object sender, EventArgs e) { maxOddsNumeric.Minimum = minOddsNumeric.Value; }
-        private void maxOddsNumeric_ValueChanged(object sender, EventArgs e) { minOddsNumeric.Maximum = maxOddsNumeric.Value; }
-        private void ratingMinNumeric_ValueChanged(object sender, EventArgs e) { maxRatingNumeric.Minimum = minRatingNumeric.Value; }
-        private void ratingMaxNumeric_ValueChanged(object sender, EventArgs e) { minRatingNumeric.Maximum = maxRatingNumeric.Value; }
+
+        private void minOddsNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            maxOddsNumeric.Minimum = minOddsNumeric.Value;
+        }
+
+        private void maxOddsNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            minOddsNumeric.Maximum = maxOddsNumeric.Value;
+        }
+
+        private void ratingMinNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            maxRatingNumeric.Minimum = minRatingNumeric.Value;
+        }
+
+        private void ratingMaxNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            minRatingNumeric.Maximum = maxRatingNumeric.Value;
+        }
 
         private async void loadDataBtn_Click(object sender, EventArgs e)
         {
-            // TODO: Add BindingSource for Data, Split function
-            // tblMatchedResults.DataSource = null;
-            // tblMatchedResults.Columns.Clear();
-            // tblMatchedResults.Rows.Clear();
-            
+            // Clear Previous response data.
             updateSelections();
-            
+
+            // Get Unfiltered Results
             GetBestMatch[] apiResponse = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked);
-            List<MatchedEvent> matchedEvents = new List<MatchedEvent>();
+            unfilteredMatchedEvents = new List<MatchedEvent>();
             foreach (GetBestMatch bestMatch in apiResponse)
             {
-                MatchedEvent @event = new MatchedEvent(bestMatch);
-                matchedEvents.Add(@event);
+                MatchedEvent @event = new MatchedEvent(bestMatch, snrCheck.Checked, stakeNumeric.Value);
+                unfilteredMatchedEvents.Add(@event);
             }
-            
-            // tblMatchedResults.DataSource = matchedEvents;
 
+            // Update filtered results if need be.
+            if (shouldApplyFilters)
+            {
+                applyFilters();
+            }
+            else
+            {
+                filteredMatchedEvents = unfilteredMatchedEvents.ToList();
+            }
         }
 
         private void updateSelections()
         {
-            selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[]{ };
+            selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[] { };
             selectedSports = multiSport.SelectedItems.Count != 0 ? convertItemsToStringArray(multiSport.SelectedItems, Sports) : new string[] { };
         }
 
@@ -87,6 +112,35 @@ namespace GraphQL
             }
 
             return selectedItemStrings.ToArray();
+        }
+
+        private void applyFilters()
+        {
+            foreach (var Event in unfilteredMatchedEvents)
+            {
+                Event.calculateValues(snrCheck.Checked, stakeNumeric.Value);
+            }
+
+            filteredMatchedEvents = unfilteredMatchedEvents
+                .Where(x => x.liability <= maxLiabilityNumeric.Value)
+                .Where(y => y.profitLoss >= -maxLossNumeric.Value)
+                .ToList();
+        }
+
+        private void applyFilterBtn_Click(object sender, EventArgs e)
+        {
+            if (!shouldApplyFilters)
+            {
+                tblMatchedResults.DataSource = unfilteredMatchedEvents;
+                return;
+            }
+
+            if (unfilteredMatchedEvents.Count != 0) applyFilters();
+        }
+
+        private void filterCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            shouldApplyFilters = filterCheckbox.Checked;
         }
     }
 }

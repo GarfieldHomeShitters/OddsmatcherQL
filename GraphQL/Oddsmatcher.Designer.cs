@@ -36,6 +36,12 @@
             this.bookmakerDeselectButton = new System.Windows.Forms.Button();
             this.minOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.maxLiabilityNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            this.maxLossNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            this.filterCheckbox = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.stakeNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.multiSport = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
             this.snrCheck = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,15 +51,19 @@
             this.maxOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.quickCheckBoxReflectable1 = new Syncfusion.Windows.Forms.Tools.QuickCheckBoxReflectable();
             this.loadDataBtn = new System.Windows.Forms.Button();
-            this.sfDataGrid1 = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.tblMatchedResults = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.applyFilterBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxLiabilityNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxLossNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiSport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRatingNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRatingNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).BeginInit();
             this.SuspendLayout();
             // 
             // configSelection
@@ -131,6 +141,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.maxLiabilityNumeric);
+            this.panel1.Controls.Add(this.maxLossNumeric);
+            this.panel1.Controls.Add(this.filterCheckbox);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.stakeNumeric);
             this.panel1.Controls.Add(this.multiSport);
             this.panel1.Controls.Add(this.snrCheck);
             this.panel1.Controls.Add(this.label2);
@@ -145,6 +161,98 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(936, 121);
             this.panel1.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(567, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 14);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Max Loss:      Max Liability\r\n:";
+            // 
+            // maxLiabilityNumeric
+            // 
+            this.maxLiabilityNumeric.BackColor = System.Drawing.Color.White;
+            this.maxLiabilityNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
+            this.maxLiabilityNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.maxLiabilityNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.maxLiabilityNumeric.DecimalPlaces = 2;
+            this.maxLiabilityNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.maxLiabilityNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.maxLiabilityNumeric.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
+            this.maxLiabilityNumeric.Location = new System.Drawing.Point(636, 67);
+            this.maxLiabilityNumeric.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            this.maxLiabilityNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this.maxLiabilityNumeric.Name = "maxLiabilityNumeric";
+            this.maxLiabilityNumeric.Size = new System.Drawing.Size(66, 24);
+            this.maxLiabilityNumeric.TabIndex = 18;
+            this.maxLiabilityNumeric.ThemeName = "Metro";
+            this.maxLiabilityNumeric.Value = new decimal(new int[] { 50, 0, 0, 0 });
+            this.maxLiabilityNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            // 
+            // maxLossNumeric
+            // 
+            this.maxLossNumeric.BackColor = System.Drawing.Color.White;
+            this.maxLossNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
+            this.maxLossNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.maxLossNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.maxLossNumeric.DecimalPlaces = 2;
+            this.maxLossNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.maxLossNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.maxLossNumeric.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
+            this.maxLossNumeric.Location = new System.Drawing.Point(567, 67);
+            this.maxLossNumeric.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+            this.maxLossNumeric.Minimum = new decimal(new int[] { 500, 0, 0, -2147483648 });
+            this.maxLossNumeric.Name = "maxLossNumeric";
+            this.maxLossNumeric.Size = new System.Drawing.Size(66, 24);
+            this.maxLossNumeric.TabIndex = 17;
+            this.maxLossNumeric.ThemeName = "Metro";
+            this.maxLossNumeric.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            this.maxLossNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            // 
+            // filterCheckbox
+            // 
+            this.filterCheckbox.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.filterCheckbox.Location = new System.Drawing.Point(880, 67);
+            this.filterCheckbox.Name = "filterCheckbox";
+            this.filterCheckbox.Size = new System.Drawing.Size(53, 24);
+            this.filterCheckbox.TabIndex = 16;
+            this.filterCheckbox.Text = "Filter";
+            this.filterCheckbox.UseVisualStyleBackColor = true;
+            this.filterCheckbox.CheckedChanged += new System.EventHandler(this.filterCheckbox_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(495, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Stake:";
+            // 
+            // stakeNumeric
+            // 
+            this.stakeNumeric.BackColor = System.Drawing.Color.White;
+            this.stakeNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
+            this.stakeNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.stakeNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.stakeNumeric.DecimalPlaces = 2;
+            this.stakeNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.stakeNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.stakeNumeric.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
+            this.stakeNumeric.Location = new System.Drawing.Point(495, 67);
+            this.stakeNumeric.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+            this.stakeNumeric.Minimum = new decimal(new int[] { 20, 0, 0, 131072 });
+            this.stakeNumeric.Name = "stakeNumeric";
+            this.stakeNumeric.Size = new System.Drawing.Size(66, 24);
+            this.stakeNumeric.TabIndex = 14;
+            this.stakeNumeric.ThemeName = "Metro";
+            this.stakeNumeric.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            this.stakeNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
             // 
             // multiSport
             // 
@@ -171,7 +279,7 @@
             // snrCheck
             // 
             this.snrCheck.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.snrCheck.Location = new System.Drawing.Point(852, 24);
+            this.snrCheck.Location = new System.Drawing.Point(880, 94);
             this.snrCheck.Name = "snrCheck";
             this.snrCheck.Size = new System.Drawing.Size(53, 24);
             this.snrCheck.TabIndex = 12;
@@ -267,23 +375,31 @@
             // 
             // loadDataBtn
             // 
-            this.loadDataBtn.Location = new System.Drawing.Point(864, 138);
+            this.loadDataBtn.Location = new System.Drawing.Point(850, 138);
             this.loadDataBtn.Name = "loadDataBtn";
-            this.loadDataBtn.Size = new System.Drawing.Size(75, 23);
+            this.loadDataBtn.Size = new System.Drawing.Size(98, 23);
             this.loadDataBtn.TabIndex = 14;
-            this.loadDataBtn.Text = "Refresh";
+            this.loadDataBtn.Text = "Refresh API Data";
             this.loadDataBtn.UseVisualStyleBackColor = true;
             this.loadDataBtn.Click += new System.EventHandler(this.loadDataBtn_Click);
             // 
-            // sfDataGrid1
+            // tblMatchedResults
             // 
-            this.sfDataGrid1.AccessibleName = "Table";
-            this.sfDataGrid1.AllowEditing = false;
-            this.sfDataGrid1.Location = new System.Drawing.Point(12, 167);
-            this.sfDataGrid1.Name = "sfDataGrid1";
-            this.sfDataGrid1.Size = new System.Drawing.Size(936, 521);
-            this.sfDataGrid1.TabIndex = 15;
-            this.sfDataGrid1.Text = "sfDataGrid1";
+            this.tblMatchedResults.AccessibleName = "Table";
+            this.tblMatchedResults.AllowEditing = false;
+            this.tblMatchedResults.Location = new System.Drawing.Point(12, 167);
+            this.tblMatchedResults.Name = "tblMatchedResults";
+            this.tblMatchedResults.Size = new System.Drawing.Size(936, 521);
+            this.tblMatchedResults.TabIndex = 15;
+            // 
+            // applyFilterBtn
+            // 
+            this.applyFilterBtn.Location = new System.Drawing.Point(746, 138);
+            this.applyFilterBtn.Name = "applyFilterBtn";
+            this.applyFilterBtn.Size = new System.Drawing.Size(98, 23);
+            this.applyFilterBtn.TabIndex = 16;
+            this.applyFilterBtn.Text = "Apply Filter";
+            this.applyFilterBtn.UseVisualStyleBackColor = true;
             // 
             // Oddsmatcher
             // 
@@ -291,7 +407,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(960, 700);
-            this.Controls.Add(this.sfDataGrid1);
+            this.Controls.Add(this.applyFilterBtn);
+            this.Controls.Add(this.tblMatchedResults);
             this.Controls.Add(this.loadDataBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoadConfig);
@@ -302,15 +419,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.maxLiabilityNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxLossNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiSport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRatingNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRatingNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
             this.ResumeLayout(false);
         }
 
-        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid1;
+        private System.Windows.Forms.CheckBox filterCheckbox;
+        private System.Windows.Forms.Button applyFilterBtn;
+        private System.Windows.Forms.Label label4;
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt maxLiabilityNumeric;
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt maxLossNumeric;
+
+        private System.Windows.Forms.Label label3;
+
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt stakeNumeric;
+
+        private Syncfusion.WinForms.DataGrid.SfDataGrid tblMatchedResults;
 
         private System.Windows.Forms.Button loadDataBtn;
 
