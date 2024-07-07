@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using GraphQL.Client.Abstractions;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
+using GraphQL.API;
+using GraphQL.Datatypes;
+using Syncfusion.DataSource.Extensions;
 using Syncfusion.Windows.Forms.Tools;
-
 
 namespace GraphQL
 {
     public partial class Oddsmatcher : Form
     {
-        private readonly IGraphQLClient GraphQlClient;
+
         private readonly FileInfo[] configs;
         private readonly string[] Bookmakers;
         private readonly string[] Sports;
+        private APIService ApiService;
         public Oddsmatcher()
         {
             // TODO: Make paths relative?? Not releasing so who really cared but for best practise.
+            ApiService = new APIService();
             configs = new DirectoryInfo("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs").GetFiles("*.json");
             Bookmakers = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableBookmakers.txt");
             Sports = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableSports.txt");
-            GraphQlClient = new GraphQLHttpClient("https://api.oddsplatform.profitaccumulator.com/graphql", new NewtonsoftJsonSerializer());
+            
             InitializeComponent();
         }
 
         private void Oddsmatcher_Load(object sender, EventArgs e)
         {
             foreach (var bookmaker in Bookmakers) multiBookmaker.Items.Add(bookmaker);
+            foreach (var sport in Sports) multiSport.Items.Add(sport);
             configSelection.DataSource = configs;
             configSelection.DisplayMember = "Name";
         }
@@ -48,7 +46,42 @@ namespace GraphQL
         
         private void minOddsNumeric_ValueChanged(object sender, EventArgs e) { maxOddsNumeric.Minimum = minOddsNumeric.Value; }
         private void maxOddsNumeric_ValueChanged(object sender, EventArgs e) { minOddsNumeric.Maximum = maxOddsNumeric.Value; }
-        private void ratingMinNumeric_ValueChanged(object sender, EventArgs e) { ratingMaxNumeric.Minimum = ratingMinNumeric.Value; }
-        private void ratingMaxNumeric_ValueChanged(object sender, EventArgs e) { ratingMinNumeric.Maximum = ratingMaxNumeric.Value; }
+        private void ratingMinNumeric_ValueChanged(object sender, EventArgs e) { maxRatingNumeric.Minimum = minRatingNumeric.Value; }
+        private void ratingMaxNumeric_ValueChanged(object sender, EventArgs e) { minRatingNumeric.Maximum = maxRatingNumeric.Value; }
+
+        private async void loadDataBtn_Click(object sender, EventArgs e)
+        {
+            tblMatchedResults.Columns.Clear();
+            tblMatchedResults.Rows.Clear();
+            string[] selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[]{ };
+            string[] selectedSports = multiSport.SelectedItems.Count != 0 ? convertItemsToStringArray(multiSport.SelectedItems, Sports) : new string[] { };
+            GetBestMatch[] responseMatchList = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked);
+            foreach (var Prop in responseMatchList.First().GetType().GetProperties())
+            {
+                tblMatchedResults.Columns.Add(Prop.Name, Prop.Name);
+            }
+
+            foreach (GetBestMatch matchedEvent in responseMatchList)
+            {
+                List<object> values = new List<object>();
+                foreach (var Prop in matchedEvent.GetType().GetProperties())
+                {
+                    values.Add(Prop.GetValue(matchedEvent));
+                }
+
+                tblMatchedResults.Rows.Add(values);
+            }
+        }
+
+        private string[] convertItemsToStringArray(MultiSelectionComboBox.SelectedObjectCollection selectedObjects, string[] RefNames)
+        {
+            List<string> selectedItemStrings = new List<string>();
+            foreach (DataRowView Object in selectedObjects)
+            {
+                selectedItemStrings.Add(Object.Row.ItemArray.First().ToString());
+            }
+
+            return selectedItemStrings.ToArray();
+        }
     }
 }

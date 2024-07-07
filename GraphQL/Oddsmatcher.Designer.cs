@@ -37,21 +37,22 @@
             this.bookmakerDeselectButton = new System.Windows.Forms.Button();
             this.minOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.sportSelection = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
+            this.multiSport = new Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox();
             this.snrCheck = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.ratingMaxNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
-            this.ratingMinNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            this.maxRatingNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            this.minRatingNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.label1 = new System.Windows.Forms.Label();
             this.maxOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.quickCheckBoxReflectable1 = new Syncfusion.Windows.Forms.Tools.QuickCheckBoxReflectable();
+            this.loadDataBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sportSelection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ratingMaxNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ratingMinNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.multiSport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRatingNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minRatingNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,11 +142,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.panel1.Controls.Add(this.sportSelection);
+            this.panel1.Controls.Add(this.multiSport);
             this.panel1.Controls.Add(this.snrCheck);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.ratingMaxNumeric);
-            this.panel1.Controls.Add(this.ratingMinNumeric);
+            this.panel1.Controls.Add(this.maxRatingNumeric);
+            this.panel1.Controls.Add(this.minRatingNumeric);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.maxOddsNumeric);
             this.panel1.Controls.Add(this.bookmakerDeselectButton);
@@ -156,27 +157,27 @@
             this.panel1.Size = new System.Drawing.Size(936, 121);
             this.panel1.TabIndex = 7;
             // 
-            // sportSelection
+            // multiSport
             // 
-            this.sportSelection.AutoSizeMode = Syncfusion.Windows.Forms.Tools.AutoSizeModes.None;
-            this.sportSelection.BackColor = System.Drawing.Color.White;
-            this.sportSelection.BeforeTouchSize = new System.Drawing.Size(243, 30);
-            this.sportSelection.ButtonStyle = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            this.sportSelection.DelimiterChar = ", ";
-            this.sportSelection.DisplayMode = Syncfusion.Windows.Forms.Tools.DisplayMode.DelimiterMode;
-            this.sportSelection.FlatBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.sportSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.sportSelection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sportSelection.Location = new System.Drawing.Point(318, 18);
-            this.sportSelection.Name = "sportSelection";
-            this.sportSelection.ShowCheckBox = true;
-            this.sportSelection.Size = new System.Drawing.Size(243, 30);
-            this.sportSelection.TabIndex = 13;
-            this.sportSelection.ThemeName = "Metro";
-            this.sportSelection.ThemeStyle.FocusedBorderColor = System.Drawing.Color.Silver;
-            this.sportSelection.ThemeStyle.HoverBorderColor = System.Drawing.Color.Gray;
-            this.sportSelection.ThemeStyle.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.sportSelection.UseVisualStyle = true;
+            this.multiSport.AutoSizeMode = Syncfusion.Windows.Forms.Tools.AutoSizeModes.None;
+            this.multiSport.BackColor = System.Drawing.Color.White;
+            this.multiSport.BeforeTouchSize = new System.Drawing.Size(243, 30);
+            this.multiSport.ButtonStyle = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.multiSport.DelimiterChar = ", ";
+            this.multiSport.DisplayMode = Syncfusion.Windows.Forms.Tools.DisplayMode.DelimiterMode;
+            this.multiSport.FlatBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.multiSport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.multiSport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.multiSport.Location = new System.Drawing.Point(318, 18);
+            this.multiSport.Name = "multiSport";
+            this.multiSport.ShowCheckBox = true;
+            this.multiSport.Size = new System.Drawing.Size(243, 30);
+            this.multiSport.TabIndex = 13;
+            this.multiSport.ThemeName = "Metro";
+            this.multiSport.ThemeStyle.FocusedBorderColor = System.Drawing.Color.Silver;
+            this.multiSport.ThemeStyle.HoverBorderColor = System.Drawing.Color.Gray;
+            this.multiSport.ThemeStyle.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.multiSport.UseVisualStyle = true;
             // 
             // snrCheck
             // 
@@ -198,44 +199,44 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Min Rating:    Max Rating:";
             // 
-            // ratingMaxNumeric
+            // maxRatingNumeric
             // 
-            this.ratingMaxNumeric.BackColor = System.Drawing.Color.White;
-            this.ratingMaxNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
-            this.ratingMaxNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
-            this.ratingMaxNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ratingMaxNumeric.DecimalPlaces = 2;
-            this.ratingMaxNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.ratingMaxNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.ratingMaxNumeric.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            this.ratingMaxNumeric.Location = new System.Drawing.Point(780, 24);
-            this.ratingMaxNumeric.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
-            this.ratingMaxNumeric.Name = "ratingMaxNumeric";
-            this.ratingMaxNumeric.Size = new System.Drawing.Size(66, 24);
-            this.ratingMaxNumeric.TabIndex = 10;
-            this.ratingMaxNumeric.ThemeName = "Metro";
-            this.ratingMaxNumeric.Value = new decimal(new int[] { 99, 0, 0, 0 });
-            this.ratingMaxNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
-            this.ratingMaxNumeric.ValueChanged += new System.EventHandler(this.ratingMaxNumeric_ValueChanged);
+            this.maxRatingNumeric.BackColor = System.Drawing.Color.White;
+            this.maxRatingNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
+            this.maxRatingNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.maxRatingNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.maxRatingNumeric.DecimalPlaces = 2;
+            this.maxRatingNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.maxRatingNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.maxRatingNumeric.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            this.maxRatingNumeric.Location = new System.Drawing.Point(780, 24);
+            this.maxRatingNumeric.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+            this.maxRatingNumeric.Name = "maxRatingNumeric";
+            this.maxRatingNumeric.Size = new System.Drawing.Size(66, 24);
+            this.maxRatingNumeric.TabIndex = 10;
+            this.maxRatingNumeric.ThemeName = "Metro";
+            this.maxRatingNumeric.Value = new decimal(new int[] { 99, 0, 0, 0 });
+            this.maxRatingNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            this.maxRatingNumeric.ValueChanged += new System.EventHandler(this.ratingMaxNumeric_ValueChanged);
             // 
-            // ratingMinNumeric
+            // minRatingNumeric
             // 
-            this.ratingMinNumeric.BackColor = System.Drawing.Color.White;
-            this.ratingMinNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
-            this.ratingMinNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
-            this.ratingMinNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ratingMinNumeric.DecimalPlaces = 2;
-            this.ratingMinNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.ratingMinNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.ratingMinNumeric.Location = new System.Drawing.Point(708, 24);
-            this.ratingMinNumeric.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
-            this.ratingMinNumeric.Name = "ratingMinNumeric";
-            this.ratingMinNumeric.Size = new System.Drawing.Size(66, 24);
-            this.ratingMinNumeric.TabIndex = 9;
-            this.ratingMinNumeric.ThemeName = "Metro";
-            this.ratingMinNumeric.Value = new decimal(new int[] { 50, 0, 0, 0 });
-            this.ratingMinNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
-            this.ratingMinNumeric.ValueChanged += new System.EventHandler(this.ratingMinNumeric_ValueChanged);
+            this.minRatingNumeric.BackColor = System.Drawing.Color.White;
+            this.minRatingNumeric.BeforeTouchSize = new System.Drawing.Size(66, 24);
+            this.minRatingNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.minRatingNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.minRatingNumeric.DecimalPlaces = 2;
+            this.minRatingNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.minRatingNumeric.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
+            this.minRatingNumeric.Location = new System.Drawing.Point(708, 24);
+            this.minRatingNumeric.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
+            this.minRatingNumeric.Name = "minRatingNumeric";
+            this.minRatingNumeric.Size = new System.Drawing.Size(66, 24);
+            this.minRatingNumeric.TabIndex = 9;
+            this.minRatingNumeric.ThemeName = "Metro";
+            this.minRatingNumeric.Value = new decimal(new int[] { 50, 0, 0, 0 });
+            this.minRatingNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            this.minRatingNumeric.ValueChanged += new System.EventHandler(this.ratingMinNumeric_ValueChanged);
             // 
             // label1
             // 
@@ -275,12 +276,23 @@
             this.quickCheckBoxReflectable1.Size = new System.Drawing.Size(23, 23);
             this.quickCheckBoxReflectable1.Text = "quickCheckBoxReflectable1";
             // 
+            // loadDataBtn
+            // 
+            this.loadDataBtn.Location = new System.Drawing.Point(864, 138);
+            this.loadDataBtn.Name = "loadDataBtn";
+            this.loadDataBtn.Size = new System.Drawing.Size(75, 23);
+            this.loadDataBtn.TabIndex = 14;
+            this.loadDataBtn.Text = "Refresh";
+            this.loadDataBtn.UseVisualStyleBackColor = true;
+            this.loadDataBtn.Click += new System.EventHandler(this.loadDataBtn_Click);
+            // 
             // Oddsmatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(960, 700);
+            this.Controls.Add(this.loadDataBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoadConfig);
             this.Controls.Add(this.configSelection);
@@ -292,21 +304,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sportSelection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ratingMaxNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ratingMinNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.multiSport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRatingNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minRatingNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxOddsNumeric)).EndInit();
             this.ResumeLayout(false);
         }
 
-        private Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox sportSelection;
+        private System.Windows.Forms.Button loadDataBtn;
+
+        private Syncfusion.Windows.Forms.Tools.MultiSelectionComboBox multiSport;
 
         private System.Windows.Forms.CheckBox snrCheck;
 
         private Syncfusion.Windows.Forms.Tools.QuickCheckBoxReflectable quickCheckBoxReflectable1;
 
-        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt ratingMinNumeric;
-        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt ratingMaxNumeric;
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt minRatingNumeric;
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt maxRatingNumeric;
         private System.Windows.Forms.Label label2;
 
         private System.Windows.Forms.Label label1;

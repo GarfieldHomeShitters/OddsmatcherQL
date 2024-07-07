@@ -1,0 +1,22 @@
+{
+  "bookmaker": ["10bet","12bet","32red","7bet","888sport","barone","bet365","bet600","betano","betboro","betdaq","betfair","betfairexchange","betfred","betgoodwin","betmgm","betuk","betvictor","betvision","betway","betzone","boylesports","bresbet","bwin","casumo","copybet","coral","dafabet","daznbet","dragonbet", "fafabet","fanteam","fitzdares","fun88","gentlemanjim","geoffbanks","grosvenor","hollywoodbets","jackpotjoy","kwiff","ladbrokes","leovegas","livescorebet","lottoland","matchbookexchange","mcbookie","midnite","mrgreen","nebet","netbet","nrg","octobet","paddypower","parimatch","partypoker","planetsportbet","pokerstars","quinnbet","rhinobet","skybet","spacecasino","sportingindex","sportingbet","spreadex","starsports","talksportbet","thepools","tlcbet","tote","unibet","vbet","vickers","virginbet","williamhill","yeeehaaa"],
+  "exchange": ["smarketsexchange"],
+  "minRating": null,
+  "maxRating": "200",
+  "timeframeStart": null,
+  "timeframeEnd": null,
+  "searchByEventName": null,
+  "limit": 10,
+  "cap": 200,
+  "updatedWithinSeconds": 21600,
+  "excludeDraw": false,
+  "minLiquidity": null,
+  "ratingType": "rating",
+  "minOdds": null,
+  "maxOdds": null,
+  "permittedMarketGroups": ["win-market","match-odds","over-under","half-time-full-time","correct-score","both-teams-to-score"],
+  "permittedSports": ["soccer", "horseracing"],
+  "skip": 0,
+  "permittedEventGroups": [],
+  "commissionRates": [{"exchange": "betdaq", "rate": 0}, {"exchange": "betfair", "rate": 5}, {"exchange": "matchbook", "rate": 0}, {"exchange": "smarkets", "rate": 0}, {"exchange": "pocketbet", "rate": 0}]
+}
