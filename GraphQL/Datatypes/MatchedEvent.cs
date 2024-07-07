@@ -32,7 +32,7 @@ namespace GraphQL.Datatypes
             this.backStake = backStake;
             SnR = isSnR;
 
-            calculateValues(SnR);
+            calculateValues(SnR, backStake);
         }
 
         public void calculateValues(bool isSnR, decimal backStake = 5.00m)
