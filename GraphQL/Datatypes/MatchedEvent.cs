@@ -19,7 +19,7 @@ namespace GraphQL.Datatypes
         public decimal liabilityQual { get; private set; }
         public decimal liabilitySnR { get; private set; }
 
-        public MatchedEvent(GetBestMatch bestMatch, decimal backStake)
+        public MatchedEvent(GetBestMatch bestMatch, decimal backStake = 5.00m)
         {
             startAt = DateTime.TryParse(bestMatch.StartAt, out DateTime parsedDate) ? parsedDate : DateTime.Now;
             eventName = bestMatch.EventName;
