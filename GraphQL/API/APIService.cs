@@ -46,9 +46,10 @@ namespace GraphQL.API
             Dictionary<string, object> _Variables = JsonConvert.DeserializeObject<Dictionary<string, object>>(defaultQueryVariables);
             
             Bookmakers = Bookmakers.Select(s => s.ToLowerInvariant()).ToArray();
+            
             Array.Sort(Bookmakers);
             
-            _Variables["bookmaker"] = Bookmakers;
+            _Variables["bookmaker"] = Bookmakers.Select(s => s.Replace(" ", "")).ToArray();
             _Variables["permittedSports"] = Sports;
             _Variables["minOdds"] = minOdds.ToString("0.##");
             _Variables["maxOdds"] = maxOdds.ToString("0.##");
