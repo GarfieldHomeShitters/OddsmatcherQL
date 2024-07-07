@@ -55,8 +55,14 @@ namespace GraphQL
             tblMatchedResults.Rows.Clear();
             string[] selectedBookmakers = multiBookmaker.SelectedItems.Count != 0 ? convertItemsToStringArray(multiBookmaker.SelectedItems, Bookmakers) : new string[]{ };
             string[] selectedSports = multiSport.SelectedItems.Count != 0 ? convertItemsToStringArray(multiSport.SelectedItems, Sports) : new string[] { };
-            GetBestMatch[] responseMatchList = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked);
-            foreach (var Prop in responseMatchList.First().GetType().GetProperties())
+            GetBestMatch[] apiResponse = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked);
+            List<MatchedEvent> matchedEvents = new List<MatchedEvent>();
+            foreach (GetBestMatch bestMatch in apiResponse)
+            {
+                MatchedEvent @event = new MatchedEvent(bestMatch);
+                matchedEvents.Add(@event);
+            }
+            foreach (var Prop in matchedEvents.First().GetType().GetProperties())
             {
                 tblMatchedResults.Columns.Add(Prop.Name, Prop.Name);
             }
@@ -71,7 +77,9 @@ namespace GraphQL
 
                 tblMatchedResults.Rows.AddRange(values.ToArray());
             }*/
-            
+
+            tblMatchedResults.DataSource = matchedEvents;
+
         }
 
         private string[] convertItemsToStringArray(MultiSelectionComboBox.SelectedObjectCollection selectedObjects, string[] RefNames)
