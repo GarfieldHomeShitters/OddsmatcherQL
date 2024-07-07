@@ -4,12 +4,6 @@ using Newtonsoft.Json.Converters;
 
 namespace GraphQL.Datatypes
 {
-    public partial class ReturnData
-    {
-        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
-        public Data Data { get; set; }
-    }
-
     public class Data
     {
         [JsonProperty("getBestMatches", NullValueHandling = NullValueHandling.Ignore)]

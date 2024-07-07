@@ -61,7 +61,7 @@ namespace GraphQL
                 tblMatchedResults.Columns.Add(Prop.Name, Prop.Name);
             }
 
-            foreach (GetBestMatch matchedEvent in responseMatchList)
+            /*foreach (GetBestMatch matchedEvent in responseMatchList)
             {
                 List<object> values = new List<object>();
                 foreach (var Prop in matchedEvent.GetType().GetProperties())
@@ -69,8 +69,9 @@ namespace GraphQL
                     values.Add(Prop.GetValue(matchedEvent));
                 }
 
-                tblMatchedResults.Rows.Add(values);
-            }
+                tblMatchedResults.Rows.AddRange(values.ToArray());
+            }*/
+            
         }
 
         private string[] convertItemsToStringArray(MultiSelectionComboBox.SelectedObjectCollection selectedObjects, string[] RefNames)

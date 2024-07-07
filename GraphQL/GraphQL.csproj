@@ -235,7 +235,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="API\APIService.cs" />
-        <Compile Include="Datatypes\Datatypes.cs" />
+        <Compile Include="Datatypes\APIDatatypes.cs" />
         <Compile Include="Oddsmatcher.cs">
             <SubType>Form</SubType>
         </Compile>
