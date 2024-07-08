@@ -400,6 +400,7 @@
             this.applyFilterBtn.TabIndex = 16;
             this.applyFilterBtn.Text = "Apply Filter";
             this.applyFilterBtn.UseVisualStyleBackColor = true;
+            this.applyFilterBtn.Click += new System.EventHandler(this.applyFilterBtn_Click);
             // 
             // Oddsmatcher
             // 
