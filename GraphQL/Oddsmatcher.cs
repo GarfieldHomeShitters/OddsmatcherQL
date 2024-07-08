@@ -126,17 +126,18 @@ namespace GraphQL
                 .Where(x => x.liability <= maxLiabilityNumeric.Value)
                 .Where(y => y.profitLoss >= -maxLossNumeric.Value)
                 .ToList();
-
-            tblMatchedResults.DataSource = filteredMatchedEvents;
+            tblMatchedResults.Refresh();
+            //tblMatchedResults.DataSource = filteredMatchedEvents;
         }
 
         private void applyFilterBtn_Click(object sender, EventArgs e)
         {
-            tblMatchedResults.DataSource = null;
+            //tblMatchedResults.DataSource = null;
             if (!shouldApplyFilters)
             {
                 setUnfilteredData();
-                tblMatchedResults.DataSource = filteredMatchedEvents;
+                //tblMatchedResults.DataSource = filteredMatchedEvents;
+                tblMatchedResults.Refresh();
                 return;
             }
 
