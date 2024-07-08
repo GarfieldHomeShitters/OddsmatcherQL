@@ -126,13 +126,13 @@ namespace GraphQL
                 .Where(x => x.liability <= maxLiabilityNumeric.Value)
                 .Where(y => y.profitLoss >= -maxLossNumeric.Value)
                 .ToList();
-
+            //tblMatchedResults.Refresh();
             tblMatchedResults.DataSource = filteredMatchedEvents;
         }
 
         private void applyFilterBtn_Click(object sender, EventArgs e)
         {
-            tblMatchedResults.DataSource = null;
+            //tblMatchedResults.DataSource = null;
             if (!shouldApplyFilters)
             {
                 setUnfilteredData();
@@ -145,11 +145,11 @@ namespace GraphQL
 
         private void setUnfilteredData()
         {
-            filteredMatchedEvents.Clear();
             foreach (var Event in unfilteredMatchedEvents)
             {
-                filteredMatchedEvents.Add(Event);
+                Event.calculateValues(snrCheck.Checked, stakeNumeric.Value);
             }
+            filteredMatchedEvents = unfilteredMatchedEvents.ToList();
         }
 
         private void filterCheckbox_CheckedChanged(object sender, EventArgs e)
