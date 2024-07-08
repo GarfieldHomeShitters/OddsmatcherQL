@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -131,13 +132,24 @@ namespace GraphQL
 
         private void applyFilterBtn_Click(object sender, EventArgs e)
         {
+            tblMatchedResults.DataSource = null;
             if (!shouldApplyFilters)
             {
-                tblMatchedResults.DataSource = unfilteredMatchedEvents;
+                setUnfilteredData();
+                tblMatchedResults.DataSource = filteredMatchedEvents;
                 return;
             }
 
             if (unfilteredMatchedEvents.Count != 0) applyFilters();
+        }
+
+        private void setUnfilteredData()
+        {
+            filteredMatchedEvents.Clear();
+            foreach (var Event in unfilteredMatchedEvents)
+            {
+                filteredMatchedEvents.Add(Event);
+            }
         }
 
         private void filterCheckbox_CheckedChanged(object sender, EventArgs e)
