@@ -126,17 +126,19 @@ namespace GraphQL
                 .Where(x => x.liability <= maxLiabilityNumeric.Value)
                 .Where(y => y.profitLoss >= -maxLossNumeric.Value)
                 .ToList();
-            tblMatchedResults.Refresh();
-            //tblMatchedResults.DataSource = filteredMatchedEvents;
+            //tblMatchedResults.Refresh();
+            tblMatchedResults.DataSource = filteredMatchedEvents;
         }
 
         private void applyFilterBtn_Click(object sender, EventArgs e)
         {
-            //tblMatchedResults.DataSource = null;
+            tblMatchedResults.DataSource = null;
+            tblMatchedResults.Refresh();
+            
             if (!shouldApplyFilters)
             {
                 setUnfilteredData();
-                //tblMatchedResults.DataSource = filteredMatchedEvents;
+                tblMatchedResults.DataSource = filteredMatchedEvents;
                 tblMatchedResults.Refresh();
                 return;
             }
@@ -146,16 +148,22 @@ namespace GraphQL
 
         private void setUnfilteredData()
         {
-            filteredMatchedEvents.Clear();
+            
             foreach (var Event in unfilteredMatchedEvents)
             {
-                filteredMatchedEvents.Add(Event);
+                Event.calculateValues(snrCheck.Checked, stakeNumeric.Value);
             }
+            filteredMatchedEvents = unfilteredMatchedEvents.ToList();
         }
 
         private void filterCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             shouldApplyFilters = filterCheckbox.Checked;
+        }
+
+        private void selectAllBtn_Click(object sender, EventArgs e)
+        {
+            multiBookmaker.SelectAll();
         }
     }
 }

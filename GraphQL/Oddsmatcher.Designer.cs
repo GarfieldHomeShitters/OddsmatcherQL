@@ -36,6 +36,7 @@
             this.bookmakerDeselectButton = new System.Windows.Forms.Button();
             this.minOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.selectAllBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.maxLiabilityNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.maxLossNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
@@ -109,7 +110,7 @@
             // 
             // bookmakerDeselectButton
             // 
-            this.bookmakerDeselectButton.Location = new System.Drawing.Point(12, 54);
+            this.bookmakerDeselectButton.Location = new System.Drawing.Point(139, 54);
             this.bookmakerDeselectButton.Name = "bookmakerDeselectButton";
             this.bookmakerDeselectButton.Size = new System.Drawing.Size(121, 23);
             this.bookmakerDeselectButton.TabIndex = 5;
@@ -141,6 +142,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.selectAllBtn);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.maxLiabilityNumeric);
             this.panel1.Controls.Add(this.maxLossNumeric);
@@ -161,6 +163,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(936, 121);
             this.panel1.TabIndex = 7;
+            // 
+            // selectAllBtn
+            // 
+            this.selectAllBtn.Location = new System.Drawing.Point(12, 54);
+            this.selectAllBtn.Name = "selectAllBtn";
+            this.selectAllBtn.Size = new System.Drawing.Size(121, 23);
+            this.selectAllBtn.TabIndex = 20;
+            this.selectAllBtn.Text = "Select All";
+            this.selectAllBtn.UseVisualStyleBackColor = true;
+            this.selectAllBtn.Click += new System.EventHandler(this.selectAllBtn_Click);
             // 
             // label4
             // 
@@ -312,7 +324,7 @@
             this.maxRatingNumeric.Size = new System.Drawing.Size(66, 24);
             this.maxRatingNumeric.TabIndex = 10;
             this.maxRatingNumeric.ThemeName = "Metro";
-            this.maxRatingNumeric.Value = new decimal(new int[] { 99, 0, 0, 0 });
+            this.maxRatingNumeric.Value = new decimal(new int[] { 110, 0, 0, 0 });
             this.maxRatingNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
             this.maxRatingNumeric.ValueChanged += new System.EventHandler(this.ratingMaxNumeric_ValueChanged);
             // 
@@ -331,7 +343,7 @@
             this.minRatingNumeric.Size = new System.Drawing.Size(66, 24);
             this.minRatingNumeric.TabIndex = 9;
             this.minRatingNumeric.ThemeName = "Metro";
-            this.minRatingNumeric.Value = new decimal(new int[] { 50, 0, 0, 0 });
+            this.minRatingNumeric.Value = new decimal(new int[] { 80, 0, 0, 0 });
             this.minRatingNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
             this.minRatingNumeric.ValueChanged += new System.EventHandler(this.ratingMinNumeric_ValueChanged);
             // 
@@ -430,6 +442,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button selectAllBtn;
 
         private System.Windows.Forms.CheckBox filterCheckbox;
         private System.Windows.Forms.Button applyFilterBtn;
