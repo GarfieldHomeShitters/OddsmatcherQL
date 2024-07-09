@@ -40,15 +40,15 @@ namespace GraphQL.API
             GraphQlClient = new GraphQLHttpClient("https://api.oddsplatform.profitaccumulator.com/graphql", new NewtonsoftJsonSerializer(), client);
         }
 
-        public async Task<GetBestMatch[]> FetchAPIData(string[] Bookmakers, string[] Sports, decimal minOdds, decimal maxOdds, decimal minRating, decimal maxRating, bool snr)
+        public async Task<GetBestMatch[]> FetchAPIData(string[] Bookmakers, string[] Sports, decimal minOdds, decimal maxOdds, decimal minRating, decimal maxRating, bool snr, int skip = 0)
         {
             string defaultQueryVariables = File.ReadAllText("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs\\AllBookmakers.json");
             Dictionary<string, object> _Variables = JsonConvert.DeserializeObject<Dictionary<string, object>>(defaultQueryVariables);
-            
+
             Bookmakers = Bookmakers.Select(s => s.ToLowerInvariant()).ToArray();
-            
+
             Array.Sort(Bookmakers);
-            
+
             _Variables["bookmaker"] = Bookmakers.Select(s => s.Replace(" ", "")).ToArray();
             _Variables["permittedSports"] = Sports;
             _Variables["minOdds"] = minOdds.ToString("0.##");
@@ -56,15 +56,15 @@ namespace GraphQL.API
             _Variables["minRating"] = minRating.ToString("0.##");
             _Variables["maxRating"] = maxRating.ToString("0.##");
             _Variables["cap"] = (int)Math.Floor(maxRating);
-            
+            _Variables["skip"] = skip;
+
             GraphQLRequest APIRequest = new GraphQLRequest
             {
                 OperationName = "GetBestMatches",
                 Variables = _Variables,
                 Query = File.ReadAllText("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\baseQuery.txt")
-                
             };
-            
+
             var apiResponse = await GraphQlClient.SendQueryAsync<Data>(APIRequest);
             if (apiResponse.Errors != null)
             {
@@ -72,10 +72,30 @@ namespace GraphQL.API
                 {
                     MessageBox.Show($"{error.Message}", "Error with API");
                 }
-                return new GetBestMatch[]{}; // Just return no data here.
+
+                return new GetBestMatch[] { }; // Just return no data here.
             }
+
             return apiResponse.Data.GetBestMatches;
         }
-        
+
+        public async Task<GetBestMatch[]> getAllRaceData(string[] Bookmakers)
+        {
+            string[] Sports = new string[] { "horseracing" };
+            int skip = 0;
+            List<GetBestMatch> _allMatches = new List<GetBestMatch>();
+            GetBestMatch[] newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip);
+            while (newMatches.Length >= 100 && !(_allMatches.Contains(newMatches.Last())))
+            {
+                foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
+                newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip);
+            }
+
+            if ( !_allMatches.Contains(newMatches.Last()) ) {
+                foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
+            }
+
+            return _allMatches.ToArray();
+        }
     }
 }
