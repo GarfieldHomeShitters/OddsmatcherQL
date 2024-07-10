@@ -89,6 +89,7 @@ namespace GraphQL.API
             {
                 foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
                 newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip);
+                skip += newMatches.Length;
             }
 
             if ( !_allMatches.Contains(newMatches.Last()) ) {
