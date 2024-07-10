@@ -79,7 +79,7 @@ namespace GraphQL.API
             return apiResponse.Data.GetBestMatches;
         }
 
-        public async Task<GetBestMatch[]> getAllRaceData(string[] Bookmakers)
+        public async Task<List<GetBestMatch>> getAllRaceData(string[] Bookmakers)
         {
             string[] Sports = new string[] { "horseracing" };
             int skip = 0;
@@ -95,7 +95,7 @@ namespace GraphQL.API
                 foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
             }
 
-            return _allMatches.ToArray();
+            return _allMatches;
         }
     }
 }
