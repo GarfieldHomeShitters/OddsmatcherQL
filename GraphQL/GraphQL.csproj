@@ -117,6 +117,9 @@
         <Reference Include="RestSharp, Version=111.3.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
           <HintPath>..\packages\RestSharp.111.3.1-alpha.0.6\lib\net48\RestSharp.dll</HintPath>
         </Reference>
+        <Reference Include="RestSharp.Serializers.NewtonsoftJson, Version=111.3.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+          <HintPath>..\packages\RestSharp.Serializers.NewtonsoftJson.111.3.1-alpha.0.6\lib\net48\RestSharp.Serializers.NewtonsoftJson.dll</HintPath>
+        </Reference>
         <Reference Include="Sdl.MultiSelectComboBox, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a6f9048fb51b33ed, processorArchitecture=MSIL">
           <HintPath>..\packages\Sdl.MultiSelectComboBox.1.0.77\lib\net48\Sdl.MultiSelectComboBox.dll</HintPath>
         </Reference>
@@ -299,10 +302,14 @@
         <Compile Include="API\EPRaceFinder.cs" />
         <Compile Include="API\SmarketsClient.cs" />
         <Compile Include="Datatypes\APIDatatypes.cs" />
+        <Compile Include="Datatypes\BidOffer.cs" />
+        <Compile Include="Datatypes\ContractResponse.cs" />
         <Compile Include="Datatypes\EventsResponse.cs" />
         <Compile Include="Datatypes\Horse.cs" />
+        <Compile Include="Datatypes\HorseExtraPlace.cs" />
         <Compile Include="Datatypes\MarketsResponse.cs" />
         <Compile Include="Datatypes\MatchedEvent.cs" />
+        <Compile Include="Datatypes\QuoteResponse.cs" />
         <Compile Include="Datatypes\Race.cs" />
         <Compile Include="Datatypes\SmarketContract.cs" />
         <Compile Include="Datatypes\SmarketEvent.cs" />
@@ -321,6 +328,9 @@
         </Compile>
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <EmbeddedResource Include="ExtraPlace.resx">
+          <DependentUpon>ExtraPlace.cs</DependentUpon>
+        </EmbeddedResource>
         <EmbeddedResource Include="Oddsmatcher.resx">
           <DependentUpon>Oddsmatcher.cs</DependentUpon>
         </EmbeddedResource>
@@ -361,6 +371,7 @@
       <Content Include="Default\availableBookmakers.txt" />
       <Content Include="Default\availableSports.txt" />
       <Content Include="Default\baseQuery.txt" />
+      <Content Include="Default\extraPlaceBookmakers.txt" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Datatypes\Parsers\" />
