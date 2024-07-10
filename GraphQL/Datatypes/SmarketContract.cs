@@ -1,7 +1,19 @@
+using Newtonsoft.Json;
+
 namespace GraphQL.Datatypes
 {
-    public struct SmarketContract
+    public class SmarketContract
     {
-        
+        [JsonProperty("id")]
+        public string id;
+
+        [JsonProperty("market_id")]
+        public string market_id;
+
+        [JsonProperty("slug")]
+        public string slug;
+
+        [JsonProperty("state_or_outcome")]
+        public string state_or_outcome;
     }
 }
