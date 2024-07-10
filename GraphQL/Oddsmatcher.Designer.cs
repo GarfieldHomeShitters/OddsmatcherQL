@@ -54,6 +54,7 @@
             this.loadDataBtn = new System.Windows.Forms.Button();
             this.tblMatchedResults = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.applyFilterBtn = new System.Windows.Forms.Button();
+            this.loadEPMatcher = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).BeginInit();
             this.panel1.SuspendLayout();
@@ -414,12 +415,23 @@
             this.applyFilterBtn.UseVisualStyleBackColor = true;
             this.applyFilterBtn.Click += new System.EventHandler(this.applyFilterBtn_Click);
             // 
+            // loadEPMatcher
+            // 
+            this.loadEPMatcher.Location = new System.Drawing.Point(850, 694);
+            this.loadEPMatcher.Name = "loadEPMatcher";
+            this.loadEPMatcher.Size = new System.Drawing.Size(95, 23);
+            this.loadEPMatcher.TabIndex = 17;
+            this.loadEPMatcher.Text = "Load EP Matcher";
+            this.loadEPMatcher.UseVisualStyleBackColor = true;
+            this.loadEPMatcher.Click += new System.EventHandler(this.loadEPMatcher_Click);
+            // 
             // Oddsmatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(960, 700);
+            this.ClientSize = new System.Drawing.Size(960, 723);
+            this.Controls.Add(this.loadEPMatcher);
             this.Controls.Add(this.applyFilterBtn);
             this.Controls.Add(this.tblMatchedResults);
             this.Controls.Add(this.loadDataBtn);
@@ -442,6 +454,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button loadEPMatcher;
 
         private System.Windows.Forms.Button selectAllBtn;
 

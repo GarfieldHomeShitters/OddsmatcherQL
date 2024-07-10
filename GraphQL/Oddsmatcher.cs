@@ -23,6 +23,7 @@ namespace GraphQL
         private List<MatchedEvent> unfilteredMatchedEvents;
         private List<MatchedEvent> filteredMatchedEvents;
         private bool shouldApplyFilters;
+        private ExtraPlace epMatcherForm;
 
         public Oddsmatcher()
         {
@@ -164,6 +165,12 @@ namespace GraphQL
         private void selectAllBtn_Click(object sender, EventArgs e)
         {
             multiBookmaker.SelectAll();
+        }
+
+        private void loadEPMatcher_Click(object sender, EventArgs e)
+        {
+            epMatcherForm = new ExtraPlace(ApiService);
+            epMatcherForm.Show();
         }
     }
 }
