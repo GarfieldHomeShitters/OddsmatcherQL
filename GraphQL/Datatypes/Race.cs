@@ -8,7 +8,7 @@ namespace GraphQL.Datatypes
         public string EventName;
         public List<Horse> Horses;
         public int MarketID;
-        public List<int> ContractID;
+        public int EventID;
 
         public Race(string eventName, int marketId)
         {
