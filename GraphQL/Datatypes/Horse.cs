@@ -10,7 +10,7 @@ namespace GraphQL.Datatypes
         public decimal layOdds;
         public decimal backPlaceOdds;
         public decimal layPlaceOdds;
-        public int contractID;
+        public string contractID;
         public Horse(string Name, decimal backOdds, decimal layOdds)
         {
             this.Name = Name;
@@ -19,9 +19,8 @@ namespace GraphQL.Datatypes
             backPlaceOdds = ((backOdds - 1) / 5) + 1;
         }
 
-        public void addSmarketInfo(string displayName, int percentagePrice)
+        public void addSmarketInfo(int percentagePrice)
         {
-            DisplayName = displayName;
             // Looks weird, but we have to cast one to a decimal to get out a decimal from the division
             // Decimal over float so that we have increased precision, not really needed because we round 
             // but the standard throughout the API has always been to use a decimal. 
