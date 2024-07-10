@@ -7,19 +7,33 @@ namespace GraphQL.Datatypes
     {
         public string EventName;
         public List<Horse> Horses;
-        public int MarketID;
-        public int EventID;
+        public string MarketID;
+        public string EventID;
 
-        public Race(string eventName, int marketId)
+        public Race(string eventName, string eventId)
         {
             EventName = eventName;
-            MarketID = marketId;
+            EventID = eventId;
             Horses = new List<Horse>();
         }
 
-        public void addHorse(Horse horse)
+        public void addHorses(List<GetBestMatch> _horses)
         {
-            Horses.Add(horse);
+            foreach (GetBestMatch _horse in _horses)
+            {
+                Horse horse = new Horse(_horse.MarketName, decimal.Parse(_horse.Back.Odds), decimal.Parse(_horse.Lay.Odds));
+                Horses.Add(horse);
+            }
+        }
+
+        public void assignMarketID(SmarketMarket market)
+        {
+            MarketID = market.id;
+        }
+        
+        public override string ToString()
+        {
+            return EventName;
         }
     }
 }
