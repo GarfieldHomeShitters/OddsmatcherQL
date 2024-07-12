@@ -15,5 +15,8 @@ namespace GraphQL.Datatypes
 
         [JsonProperty("state_or_outcome")]
         public string state_or_outcome;
+
+        [JsonProperty("name")] 
+        public string name;
     }
 }
