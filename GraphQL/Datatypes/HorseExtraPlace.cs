@@ -4,24 +4,24 @@ namespace GraphQL.Datatypes
 {
     public class HorseExtraPlace
     {
-        public decimal stake;
-        public decimal backWinOdds;
-        public decimal backPlaceOdds;
-        public decimal layWinOdds;
-        public decimal layPlaceOdds;
-        public decimal ProfitLossRegular;
-        public decimal ProfitLossExtraPlace;
-        public decimal ImpliedOdds;
-        public decimal Rating;
-        public decimal stakeWin;
-        public decimal stakePlace;
-        public decimal liabilityWin;
-        public decimal liabilityPlace;
+        public string Name { get; private set; }
+        public decimal stake {get; private set;}
+        public decimal backWinOdds {get; private set;}
+        public decimal backPlaceOdds {get; private set;}
+        public decimal layWinOdds {get; private set;}
+        public decimal layPlaceOdds {get; private set;}
+        public decimal ProfitLossRegular {get; private set;}
+        public decimal ProfitLossExtraPlace {get; private set;}
+        //public decimal ImpliedOdds {get; private set;}
+        public decimal stakeWin {get; private set;}
+        public decimal stakePlace {get; private set;}
+        public decimal liabilityWin {get; private set;}
+        public decimal liabilityPlace {get; private set;}
         private decimal winRet;
         private decimal placeRet;
         private decimal laywinRet;
         private decimal layplaceRet;
-        public decimal rating;
+        public decimal rating {get; private set;}
 
         public HorseExtraPlace(decimal Stake, decimal backWin, decimal backPlace, decimal layWin, decimal layPlace)
         {
@@ -34,20 +34,23 @@ namespace GraphQL.Datatypes
 
         public HorseExtraPlace(Horse horse, decimal stake)
         {
+            Name = horse.Name;
             backWinOdds = horse.backOdds;
             layWinOdds = horse.layOdds;
             backPlaceOdds = horse.backPlaceOdds;
             layPlaceOdds = horse.layPlaceOdds;
+            this.stake = stake;
         }
         
         public void calculateProfitLoss()
         {
+            calc();
             decimal horseWins = (winRet + placeRet) - (2 * stake) + -liabilityWin + -liabilityPlace;
-            decimal horsePlaces = (placeRet + layplaceRet) - (stake * 2) + -liabilityWin + -liabilityPlace;
+            decimal horsePlaces = (placeRet + laywinRet) - (stake * 2) + -liabilityWin + -liabilityPlace;
             decimal horseNoPlaceNoWin = (laywinRet + layplaceRet) - (stake * 2) + -liabilityWin + -liabilityPlace;
             ProfitLossExtraPlace = (placeRet + laywinRet + layplaceRet) - (2 * stake) - liabilityWin - liabilityPlace;
             ProfitLossRegular = Math.Min(Math.Min(horseWins, horsePlaces), horseNoPlaceNoWin);
-            rating = ((stake - ProfitLossRegular) / stake) * 100;
+            rating = (((2*stake) + ProfitLossRegular) / (2*stake)) * 100;
         }
 
         private void calc()
