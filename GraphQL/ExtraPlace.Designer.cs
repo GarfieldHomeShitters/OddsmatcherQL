@@ -38,6 +38,7 @@ namespace GraphQL
             this.stakeNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.label1 = new System.Windows.Forms.Label();
             this.bookmakerCombo = new Syncfusion.WinForms.ListView.SfComboBox();
+            this.smarketBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.epRaceCombo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).BeginInit();
@@ -57,7 +58,7 @@ namespace GraphQL
             // 
             // loadRacesButton
             // 
-            this.loadRacesButton.Location = new System.Drawing.Point(261, 12);
+            this.loadRacesButton.Location = new System.Drawing.Point(440, 12);
             this.loadRacesButton.Name = "loadRacesButton";
             this.loadRacesButton.Size = new System.Drawing.Size(105, 23);
             this.loadRacesButton.TabIndex = 1;
@@ -68,17 +69,19 @@ namespace GraphQL
             // epDatagrid
             // 
             this.epDatagrid.AccessibleName = "Table";
+            this.epDatagrid.AllowEditing = false;
+            this.epDatagrid.CopyOption = Syncfusion.WinForms.DataGrid.Enums.CopyOptions.IncludeFormat;
             this.epDatagrid.Location = new System.Drawing.Point(12, 93);
             this.epDatagrid.Name = "epDatagrid";
-            this.epDatagrid.Size = new System.Drawing.Size(776, 415);
+            this.epDatagrid.PasteOption = Syncfusion.WinForms.DataGrid.Enums.PasteOptions.None;
+            this.epDatagrid.Size = new System.Drawing.Size(1098, 521);
             this.epDatagrid.TabIndex = 2;
-            this.epDatagrid.Text = "sfDataGrid1";
             // 
             // loadDataBtn
             // 
-            this.loadDataBtn.Location = new System.Drawing.Point(261, 54);
+            this.loadDataBtn.Location = new System.Drawing.Point(261, 57);
             this.loadDataBtn.Name = "loadDataBtn";
-            this.loadDataBtn.Size = new System.Drawing.Size(105, 23);
+            this.loadDataBtn.Size = new System.Drawing.Size(173, 23);
             this.loadDataBtn.TabIndex = 3;
             this.loadDataBtn.Text = "Load Race Data";
             this.loadDataBtn.UseVisualStyleBackColor = true;
@@ -97,7 +100,7 @@ namespace GraphQL
             this.stakeNumeric.Size = new System.Drawing.Size(243, 20);
             this.stakeNumeric.TabIndex = 4;
             this.stakeNumeric.ThemeName = "Metro";
-            this.stakeNumeric.Value = new decimal(new int[] { 125, 0, 0, 131072 });
+            this.stakeNumeric.Value = new decimal(new int[] { 250, 0, 0, 131072 });
             this.stakeNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
             // 
             // label1
@@ -112,19 +115,30 @@ namespace GraphQL
             // bookmakerCombo
             // 
             this.bookmakerCombo.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            this.bookmakerCombo.Location = new System.Drawing.Point(388, 12);
+            this.bookmakerCombo.Location = new System.Drawing.Point(261, 12);
             this.bookmakerCombo.Name = "bookmakerCombo";
-            this.bookmakerCombo.Size = new System.Drawing.Size(400, 23);
+            this.bookmakerCombo.Size = new System.Drawing.Size(173, 23);
             this.bookmakerCombo.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookmakerCombo.TabIndex = 6;
             this.bookmakerCombo.TabStop = false;
+            // 
+            // smarketBtn
+            // 
+            this.smarketBtn.Location = new System.Drawing.Point(440, 57);
+            this.smarketBtn.Name = "smarketBtn";
+            this.smarketBtn.Size = new System.Drawing.Size(96, 23);
+            this.smarketBtn.TabIndex = 7;
+            this.smarketBtn.Text = "Load Smarkets Page";
+            this.smarketBtn.UseVisualStyleBackColor = true;
+            this.smarketBtn.Click += new System.EventHandler(this.smarketBtn_Click);
             // 
             // ExtraPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(800, 520);
+            this.ClientSize = new System.Drawing.Size(1122, 626);
+            this.Controls.Add(this.smarketBtn);
             this.Controls.Add(this.bookmakerCombo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.stakeNumeric);
@@ -141,6 +155,8 @@ namespace GraphQL
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerCombo)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button smarketBtn;
 
         private Syncfusion.WinForms.ListView.SfComboBox bookmakerCombo;
 
