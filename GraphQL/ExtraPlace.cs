@@ -1,12 +1,18 @@
 using System.Windows.Forms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Compilation;
 using GraphQL.API;
 using GraphQL.Datatypes;
+using Syncfusion.DataSource.Extensions;
+using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
 namespace GraphQL
 {
@@ -29,24 +35,38 @@ namespace GraphQL
             _apiService = apiService; // Just reuse the API from Oddsmatcher Form.
         }
 
+        private void EpDatagridOnQueryRowStyle(object sender, QueryRowStyleEventArgs e)
+        {
+            if (e.RowType == RowType.DefaultRow)
+            {
+                if ((e.RowData as HorseExtraPlace).rating >= 95)
+                    e.Style.BackColor = Color.PowderBlue;
+                else if ((e.RowData as HorseExtraPlace).rating >= 90)
+                    e.Style.BackColor = Color.DarkOrange;
+                else if ((e.RowData as HorseExtraPlace).rating >= 85)
+                    e.Style.BackColor = Color.PaleVioletRed;
+            }
+        }
+
         public async Task initExtraPlaceRaces()
         {
             ExtraPlaceRaces.Clear();
-            SelectedBookmakers = new []{bookmakerCombo.SelectedItem.ToString()};
+            SelectedBookmakers = new[] { bookmakerCombo.SelectedItem.ToString() };
             // All EP Race times as strings ["14:55 Lingfield", "15:55 Lingfield", "16:45 Pontefract", "17:10 Tramore", "17:17 Pontefract", "17:30 Lingfield", "18:05 Uttoxeter", "18:35 Uttoxeter", "18:55 Brighton", "19:05 Uttoxeter", "19:35 Uttoxeter", "20:20 Tramore"]
             Task<List<string>> _epRacesTask = _raceFinder.GetRaceTimesAsync();
             // ALL [HORSES] FOR ALL THE RACES + ODDS
             Task<List<GetBestMatch>> allRacesTask = _apiService.getAllRaceData(SelectedBookmakers);
             // ALL EVENTS
-            Task<List<SmarketEvent>> allEventsTask =  _smarketsClient.GetAllHorseRaces();
+            Task<List<SmarketEvent>> allEventsTask = _smarketsClient.GetAllHorseRaces();
             try
             {
                 await Task.WhenAll(_epRacesTask, allRacesTask, allEventsTask);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
             List<string> _epRaces = _epRacesTask.Result;
             List<GetBestMatch> allRaces = allRacesTask.Result;
             List<SmarketEvent> allEvents = allEventsTask.Result;
@@ -59,11 +79,18 @@ namespace GraphQL
             //List<(string, int)> smarketMarkets = _smarketsClient.GetAllHorseRacePlaceMarkets();
             foreach (SmarketEvent @event in extraPlaceEvents)
             {
-                string eventName = @event.short_name.Replace("@ ", "");
-                Race _race = new Race(eventName, @event.id);
-                _race.addHorses(epRaceMatches.Where(x => x.EventName == eventName).ToList());
-                _race.assignMarketID(placeMarkets.First(x => x.event_id == _race.EventID));
-                ExtraPlaceRaces.Add(_race);
+                try
+                {
+                    string eventName = @event.short_name.Replace("@ ", "");
+                    Race _race = new Race(eventName, @event.id);
+                    _race.addHorses(epRaceMatches.Where(x => x.EventName == eventName).ToList());
+                    _race.assignMarketID(placeMarkets.First(x => x.event_id == _race.EventID));
+                    ExtraPlaceRaces.Add(_race);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(@event.short_name, e.GetType().Name);
+                }
             }
 
             List<SmarketContract> contracts = await _smarketsClient.GetContracts(ExtraPlaceRaces);
@@ -76,6 +103,10 @@ namespace GraphQL
                     {
                         horse.contractID = contractId;
                     }
+                    else
+                    {
+                        horse.contractID = contracts.Find(x => x.name.Replace(" ", "-").Replace("'", "").ToLower() == horse.Name).id;
+                    }
                 }
             }
         }
@@ -83,21 +114,23 @@ namespace GraphQL
         private async void loadRacesButton_Click(object sender, EventArgs e)
         {
             await initExtraPlaceRaces();
+            ExtraPlaceRaces.Sort((p1, p2) =>p1.EventName.CompareTo(p2.EventName));
             epRaceCombo.DataSource = ExtraPlaceRaces;
             epRaceCombo.DisplayMember = "EventName";
             epRaceCombo.Refresh();
         }
 
-        private void loadDataBtn_Click(object sender, EventArgs e)
+        private async void loadDataBtn_Click(object sender, EventArgs e)
         {
             Race raceToLoad = epRaceCombo.SelectedItem as Race;
-            UpdateData(raceToLoad);
+            await UpdateData(raceToLoad);
         }
 
-        private async void UpdateData(Race race)
+        private async Task UpdateData(Race race)
         {
             epDatagrid.DataSource = null;
             epDatagrid.Refresh();
+            epDatagrid.SortColumnDescriptions.Clear();
             Task<List<GetBestMatch>> getAllHorses = _apiService.getAllRaceData(SelectedBookmakers);
             Task<Dictionary<string, QuoteResponse>> getQuotes = _smarketsClient.GetQuotes(race);
             await Task.WhenAll(getAllHorses, getQuotes);
@@ -107,25 +140,53 @@ namespace GraphQL
             horseExtra.Clear();
             foreach (Horse horse in race.Horses)
             {
-                QuoteResponse horseQuotes = quotes[horse.contractID];
-                GetBestMatch matchingHorse = allHorses.Find(x => x.MarketName == horse.Name);
-                horse.backOdds = decimal.Parse(matchingHorse.Back.Odds);
-                horse.layOdds = decimal.Parse(matchingHorse.Lay.Odds);
-                if (horseQuotes.Bids != null && horseQuotes.Bids.Any())
+                QuoteResponse horseQuotes = null;
+                bool shouldContinue = true;
+                if (horse.contractID != null)
                 {
-                    horse.addSmarketInfo(horseQuotes.Bids.OrderBy(bid => bid.Price).First().Price);
+                    shouldContinue = quotes.TryGetValue(horse.contractID, out horseQuotes);
+                }
+                else
+                {
+                    shouldContinue = false;
+                } 
+
+                GetBestMatch matchingHorse = allHorses.Find(x => x.SelectionId == horse.Name);
+                if (matchingHorse != null)
+                {
+                    horse.backOdds = decimal.Parse(matchingHorse.Back.Odds);
+                    horse.layOdds = decimal.Parse(matchingHorse.Lay.Odds);
+                    horse.backPlaceOdds = ((horse.backOdds - 1) / 5) + 1;
+                }
+
+                if (shouldContinue && horseQuotes.Bids != null && horseQuotes.Bids.Any()) 
+                {
+                    horse.addSmarketInfo(horseQuotes.Bids.OrderByDescending(bid => bid.Price).First().Price);
+                } else
+                {
+                    horse.addSmarketInfo(1);
                 }
                 horseExtra.Add(new HorseExtraPlace(horse, stakeNumeric.Value));
             }
 
+            foreach (HorseExtraPlace horse in horseExtra)
+            {
+                horse.calculateProfitLoss();
+            }
+            
             epDatagrid.DataSource = horseExtra;
-            epDatagrid.Refresh();
-
+            epDatagrid.QueryRowStyle += EpDatagridOnQueryRowStyle;
+            epDatagrid.SortColumnDescriptions.Add(new SortColumnDescription {ColumnName = "Rating", SortDirection = ListSortDirection.Descending});
         }
 
         private void ExtraPlace_Load(object sender, EventArgs e)
         {
             bookmakerCombo.DataSource = Bookmakers;
+        }
+
+        private void smarketBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start((epRaceCombo.SelectedItem as Race).link);
         }
     }
 }
