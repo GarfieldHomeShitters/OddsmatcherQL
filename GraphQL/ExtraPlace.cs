@@ -141,15 +141,7 @@ namespace GraphQL
             foreach (Horse horse in race.Horses)
             {
                 QuoteResponse horseQuotes = null;
-                bool shouldContinue = true;
-                if (horse.contractID != null)
-                {
-                    shouldContinue = quotes.TryGetValue(horse.contractID, out horseQuotes);
-                }
-                else
-                {
-                    shouldContinue = false;
-                } 
+                bool shouldContinue = horse.contractID != null && quotes.TryGetValue(horse.contractID, out horseQuotes); 
 
                 GetBestMatch matchingHorse = allHorses.Find(x => x.SelectionId == horse.Name);
                 if (matchingHorse != null)
@@ -176,7 +168,7 @@ namespace GraphQL
             
             epDatagrid.DataSource = horseExtra;
             epDatagrid.QueryRowStyle += EpDatagridOnQueryRowStyle;
-            epDatagrid.SortColumnDescriptions.Add(new SortColumnDescription {ColumnName = "Rating", SortDirection = ListSortDirection.Descending});
+            epDatagrid.SortColumnDescriptions.Add(new SortColumnDescription {ColumnName = "rating", SortDirection = ListSortDirection.Descending});
         }
 
         private void ExtraPlace_Load(object sender, EventArgs e)
