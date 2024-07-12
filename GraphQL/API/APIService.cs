@@ -40,7 +40,7 @@ namespace GraphQL.API
             GraphQlClient = new GraphQLHttpClient("https://api.oddsplatform.profitaccumulator.com/graphql", new NewtonsoftJsonSerializer(), client);
         }
 
-        public async Task<GetBestMatch[]> FetchAPIData(string[] Bookmakers, string[] Sports, decimal minOdds, decimal maxOdds, decimal minRating, decimal maxRating, bool snr, int skip = 0)
+        public async Task<GetBestMatch[]> FetchAPIData(string[] Bookmakers, string[] Sports, decimal minOdds, decimal maxOdds, decimal minRating, decimal maxRating, bool snr, int skip = 0, bool todayOnly = false, int limit = 100)
         {
             string defaultQueryVariables = File.ReadAllText("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs\\AllBookmakers.json");
             Dictionary<string, object> _Variables = JsonConvert.DeserializeObject<Dictionary<string, object>>(defaultQueryVariables);
@@ -57,6 +57,12 @@ namespace GraphQL.API
             _Variables["maxRating"] = maxRating.ToString("0.##");
             _Variables["cap"] = (int)Math.Floor(maxRating);
             _Variables["skip"] = skip;
+            _Variables["limit"] = limit;
+            if (todayOnly)
+            {
+                _Variables["timeframeStart"] = DateTime.Today.ToString("yyyy-MM-ddTHH:mm:sszzz");
+                _Variables["timeframeEnd"] = DateTime.Today.AddDays(1).AddMinutes(-25).ToString("yyyy-MM-ddTHH:mm:sszzz");
+            }
 
             GraphQLRequest APIRequest = new GraphQLRequest
             {
@@ -84,19 +90,15 @@ namespace GraphQL.API
             string[] Sports = new string[] { "horseracing" };
             int skip = 0;
             List<GetBestMatch> _allMatches = new List<GetBestMatch>();
-            GetBestMatch[] newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip);
-            while (newMatches.Length >= 100 && !(_allMatches.Contains(newMatches.Last())))
-            {
-                foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
-                newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip);
-                skip += newMatches.Length;
-            }
-
-            if ( !_allMatches.Contains(newMatches.Last()) ) {
-                foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
-            }
-
-            return _allMatches;
+            GetBestMatch[] newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip, true, 1000);
+            // while (newMatches.Length >= 100 && !(_allMatches.Contains(newMatches.Last())))
+            // {
+            //     foreach (GetBestMatch match in newMatches) _allMatches.Add(match);
+            //     newMatches = await FetchAPIData(Bookmakers, Sports, 1m, 999m, 0, 200, false, skip, true);
+            //     skip += newMatches.Length;
+            // }
+            //_allMatches.Add(newMatches);
+            return newMatches.ToList();
         }
     }
 }
