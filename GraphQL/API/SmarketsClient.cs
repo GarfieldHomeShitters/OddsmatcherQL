@@ -27,9 +27,10 @@ namespace GraphQL.API
         public async Task<List<SmarketEvent>> GetAllHorseRaces()
         {
             DateTime startDateTimeMin = DateTime.UtcNow.Date;
+            string startDateTimeMax = Uri.EscapeUriString(DateTime.UtcNow.Date.AddDays(1).AddMilliseconds(-1).ToString("yyyy-MM-ddTHH:mm:ssZ"));
             string formattedDateTime = startDateTimeMin.ToString("yyyy-MM-ddTHH:mm:ssZ");
             string urlSafeTime = Uri.EscapeUriString(formattedDateTime);
-            string endpoint = $"/events/?state=upcoming&type_domain=horse_racing&type_scope=single_event&with_new_type=true&start_datetime_min={urlSafeTime}&sort=id&limit=200&include_hidden=false";
+            string endpoint = $"/events/?state=upcoming&type_domain=horse_racing&type_scope=single_event&with_new_type=true&start_datetime_min={urlSafeTime}&start_datetime_max={startDateTimeMax}&sort=id&limit=200&include_hidden=false";
             RestRequest eventRequest = new RestRequest(endpoint);
             EventsResponse response = await _Client.GetAsync<EventsResponse>(eventRequest);
             return response.Events;
@@ -46,7 +47,7 @@ namespace GraphQL.API
             string endpoint = $"events/{string.Join(",", eventIdToFetch)}/markets/?sort=event_id%2Cdisplay_order&popular=false&include_hidden=false";
             RestRequest marketRequest = new RestRequest(endpoint);
             MarketsResponse response = await _Client.GetAsync<MarketsResponse>(marketRequest);
-            List<SmarketMarket> markets = new List<SmarketMarket>(response.markets.Where(x => x.slug.Contains("to-place-")));
+            List<SmarketMarket> markets = new List<SmarketMarket>(response.markets.Where(x => x.slug.Contains("to-place")));
             return markets;
         }
 
