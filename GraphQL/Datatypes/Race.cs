@@ -9,19 +9,22 @@ namespace GraphQL.Datatypes
         public List<Horse> Horses;
         public string MarketID;
         public string EventID;
+        public string link;
 
         public Race(string eventName, string eventId)
         {
             EventName = eventName;
             EventID = eventId;
             Horses = new List<Horse>();
+            link = $"https://smarkets.com/event/{eventId}";
         }
 
         public void addHorses(List<GetBestMatch> _horses)
         {
             foreach (GetBestMatch _horse in _horses)
             {
-                Horse horse = new Horse(_horse.MarketName, decimal.Parse(_horse.Back.Odds), decimal.Parse(_horse.Lay.Odds));
+                Horse horse = new Horse(_horse.SelectionId, decimal.Parse(_horse.Back.Odds), decimal.Parse(_horse.Lay.Odds));
+                horse.DisplayName = _horse.SelectionName;
                 Horses.Add(horse);
             }
         }
