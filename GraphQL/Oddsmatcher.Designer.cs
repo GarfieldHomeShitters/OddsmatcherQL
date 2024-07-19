@@ -36,6 +36,8 @@
             this.bookmakerDeselectButton = new System.Windows.Forms.Button();
             this.minOddsNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.maxStartDate = new Syncfusion.WinForms.Input.SfDateTimeEdit();
+            this.minStartDate = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             this.selectAllBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.maxLiabilityNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
@@ -143,6 +145,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.maxStartDate);
+            this.panel1.Controls.Add(this.minStartDate);
             this.panel1.Controls.Add(this.selectAllBtn);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.maxLiabilityNumeric);
@@ -164,6 +168,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(936, 121);
             this.panel1.TabIndex = 7;
+            // 
+            // maxStartDate
+            // 
+            this.maxStartDate.Cursor = System.Windows.Forms.Cursors.Default;
+            this.maxStartDate.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask;
+            this.maxStartDate.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.SortableDateTime;
+            this.maxStartDate.Location = new System.Drawing.Point(266, 91);
+            this.maxStartDate.Name = "maxStartDate";
+            this.maxStartDate.ShowDropDown = false;
+            this.maxStartDate.ShowUpDown = true;
+            this.maxStartDate.Size = new System.Drawing.Size(217, 27);
+            this.maxStartDate.TabIndex = 22;
+            this.maxStartDate.ThemeName = "Office2016DarkGray";
+            this.maxStartDate.ToolTipText = "Max Start Date";
+            // 
+            // minStartDate
+            // 
+            this.minStartDate.Cursor = System.Windows.Forms.Cursors.Default;
+            this.minStartDate.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask;
+            this.minStartDate.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.SortableDateTime;
+            this.minStartDate.Location = new System.Drawing.Point(12, 91);
+            this.minStartDate.Name = "minStartDate";
+            this.minStartDate.ShowUpDown = true;
+            this.minStartDate.Size = new System.Drawing.Size(248, 27);
+            this.minStartDate.TabIndex = 21;
+            this.minStartDate.ThemeName = "Office2016DarkGray";
+            this.minStartDate.ToolTipText = "Min Start Date";
             // 
             // selectAllBtn
             // 
@@ -438,6 +469,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoadConfig);
             this.Controls.Add(this.configSelection);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Oddsmatcher";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Oddsmatcher_Load);
@@ -454,6 +486,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private Syncfusion.WinForms.Input.SfDateTimeEdit minStartDate;
+
+        private Syncfusion.WinForms.Input.SfDateTimeEdit maxStartDate;
 
         private System.Windows.Forms.Button loadEPMatcher;
 

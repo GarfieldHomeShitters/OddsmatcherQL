@@ -84,8 +84,16 @@ namespace GraphQL
                     string eventName = @event.short_name.Replace("@ ", "");
                     Race _race = new Race(eventName, @event.id);
                     _race.addHorses(epRaceMatches.Where(x => x.EventName == eventName).ToList());
-                    _race.assignMarketID(placeMarkets.First(x => x.event_id == _race.EventID));
-                    ExtraPlaceRaces.Add(_race);
+                    var marketID = placeMarkets.FirstOrDefault(x => x.event_id == _race.EventID && int.Parse(x.market_type.param) == (int)numPlacesNumeric.Value);
+                    if (marketID != null)
+                    {
+                        _race.assignMarketID(marketID);
+                        ExtraPlaceRaces.Add(_race);
+                    }
+                    else
+                    {
+                        MessageBox.Show(eventName);
+                    }
                 }
                 catch (Exception e)
                 {

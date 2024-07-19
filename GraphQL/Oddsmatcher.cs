@@ -9,6 +9,7 @@ using GraphQL.API;
 using GraphQL.Datatypes;
 using Syncfusion.DataSource.Extensions;
 using Syncfusion.Windows.Forms.Tools;
+using Syncfusion.WinForms.Input.Events;
 
 namespace GraphQL
 {
@@ -32,7 +33,6 @@ namespace GraphQL
             configs = new DirectoryInfo("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs").GetFiles("*.json");
             Bookmakers = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableBookmakers.txt");
             Sports = File.ReadAllLines("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Default\\availableSports.txt");
-
             InitializeComponent();
         }
 
@@ -42,6 +42,8 @@ namespace GraphQL
             foreach (var sport in Sports) multiSport.Items.Add(sport);
             configSelection.DataSource = configs;
             configSelection.DisplayMember = "Name";
+            minStartDate.MinDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            minStartDate.ValueChanged += minStartDate_ValueChanged;
         }
 
         private void bookmakerDeselectButton_Click(object sender, EventArgs e)
@@ -171,6 +173,12 @@ namespace GraphQL
         {
             epMatcherForm = new ExtraPlace(ApiService);
             epMatcherForm.Show();
+        }
+
+        private void minStartDate_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
+        {
+            DateTime currValue = minStartDate.Value.Value.AddHours(4); // v Yes, I have to do this, otherwise for some reason, whenever you update the actual value for the maxStart date it changes its own min value. No idea why.
+            maxStartDate.MinDateTime = new DateTime(currValue.Date.Year, currValue.Date.Month, currValue.Date.Day, currValue.Hour, currValue.Minute, currValue.Second);
         }
     }
 }

@@ -39,10 +39,12 @@ namespace GraphQL
             this.label1 = new System.Windows.Forms.Label();
             this.bookmakerCombo = new Syncfusion.WinForms.ListView.SfComboBox();
             this.smarketBtn = new System.Windows.Forms.Button();
+            this.numPlacesNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             ((System.ComponentModel.ISupportInitialize)(this.epRaceCombo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerCombo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPlacesNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // epRaceCombo
@@ -132,12 +134,27 @@ namespace GraphQL
             this.smarketBtn.UseVisualStyleBackColor = true;
             this.smarketBtn.Click += new System.EventHandler(this.smarketBtn_Click);
             // 
+            // numPlacesNumeric
+            // 
+            this.numPlacesNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.numPlacesNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numPlacesNumeric.Location = new System.Drawing.Point(990, 60);
+            this.numPlacesNumeric.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
+            this.numPlacesNumeric.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            this.numPlacesNumeric.Name = "numPlacesNumeric";
+            this.numPlacesNumeric.Size = new System.Drawing.Size(120, 20);
+            this.numPlacesNumeric.TabIndex = 8;
+            this.numPlacesNumeric.ThemeName = "Metro";
+            this.numPlacesNumeric.Value = new decimal(new int[] { 3, 0, 0, 0 });
+            this.numPlacesNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            // 
             // ExtraPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1122, 626);
+            this.Controls.Add(this.numPlacesNumeric);
             this.Controls.Add(this.smarketBtn);
             this.Controls.Add(this.bookmakerCombo);
             this.Controls.Add(this.label1);
@@ -153,8 +170,11 @@ namespace GraphQL
             ((System.ComponentModel.ISupportInitialize)(this.epDatagrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerCombo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPlacesNumeric)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt numPlacesNumeric;
 
         private System.Windows.Forms.Button smarketBtn;
 
