@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GraphQL.Datatypes
 {
@@ -10,7 +11,7 @@ namespace GraphQL.Datatypes
         public decimal layOdds;
         public decimal backPlaceOdds;
         public decimal layPlaceOdds;
-        public string contractID;
+        public Dictionary<string, string> contractIDs;
         public Horse(string Name, decimal backOdds, decimal layOdds)
         {
             this.Name = Name;
