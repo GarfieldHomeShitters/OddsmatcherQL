@@ -53,17 +53,20 @@ namespace GraphQL.API
 
         public async Task<List<SmarketContract>> GetContracts(List<Race> races)
         {
-            // TODO: UPDATE TO GET ALL PLACE MARKETS AND CONTRACTS FOR THESE - ASSOCIATE WITH DICTIONARY IN HORSE.
             List<string> marketIdToFetch = new List<string>();
             foreach (Race race in races)
             {
                 marketIdToFetch.AddRange(race.MarketIDs.Values);
             }
-            
-            //IEnumerable<string> MarketIds = System.Linq.Chunk()
-            string endpoint = $"markets/{string.Join(",", marketIdToFetch)}/contracts/?include_hidden=false";
-            ContractResponse response = await _Client.GetAsync<ContractResponse>(endpoint);
-            List<SmarketContract> contracts = new List<SmarketContract>(response.contracts);
+
+            var MarketIds = marketIdToFetch.Chunk(100);
+            List<SmarketContract> contracts = new List<SmarketContract>();
+            foreach (var chunk in MarketIds)
+            {
+                string endpoint = $"markets/{string.Join(",", chunk)}/contracts/?include_hidden=false";
+                ContractResponse response = await _Client.GetAsync<ContractResponse>(endpoint);
+                contracts.AddRange(response.contracts);
+            }
             return contracts;
         }
 
