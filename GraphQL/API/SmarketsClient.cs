@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
-using System.Web;
-using System.Windows.Forms;
 using GraphQL.Datatypes;
 using RestSharp;
-using Newtonsoft.Json;
 using RestSharp.Serializers.NewtonsoftJson;
+
 
 namespace GraphQL.API
 {
@@ -57,23 +53,23 @@ namespace GraphQL.API
 
         public async Task<List<SmarketContract>> GetContracts(List<Race> races)
         {
+            // TODO: UPDATE TO GET ALL PLACE MARKETS AND CONTRACTS FOR THESE - ASSOCIATE WITH DICTIONARY IN HORSE.
             List<string> marketIdToFetch = new List<string>();
             foreach (Race race in races)
             {
-                marketIdToFetch.Add(race.MarketID);
+                marketIdToFetch.AddRange(race.MarketIDs.Values);
             }
-
+            
+            //IEnumerable<string> MarketIds = System.Linq.Chunk()
             string endpoint = $"markets/{string.Join(",", marketIdToFetch)}/contracts/?include_hidden=false";
-            RestRequest contractRequest = new RestRequest(endpoint);
             ContractResponse response = await _Client.GetAsync<ContractResponse>(endpoint);
             List<SmarketContract> contracts = new List<SmarketContract>(response.contracts);
             return contracts;
         }
 
-        public async Task<Dictionary<string,QuoteResponse>> GetQuotes(Race race)
+        public async Task<Dictionary<string,QuoteResponse>> GetQuotes(Race race, int places)
         {
-            string endpoint = $"markets/{race.MarketID}/quotes/";
-            RestRequest quoteRequest = new RestRequest(endpoint);
+            string endpoint = $"markets/{race.MarketIDs[places]}/quotes/";
             return await _Client.GetAsync<Dictionary<string, QuoteResponse>>(endpoint);
         }
         
