@@ -84,10 +84,11 @@ namespace GraphQL
                     string eventName = @event.short_name.Replace("@ ", "");
                     Race _race = new Race(eventName, @event.id);
                     _race.addHorses(epRaceMatches.Where(x => x.EventName == eventName).ToList());
-                    var marketID = placeMarkets.FirstOrDefault(x => x.event_id == _race.EventID && int.Parse(x.market_type.param) == (int)numPlacesNumeric.Value);
+                    var marketID = placeMarkets.Where(x => x.event_id == _race.EventID && int.Parse(x.market_type.param) == (int)numPlacesNumeric.Value);
                     if (marketID != null)
                     {
-                        _race.assignMarketID(marketID);
+                        // ASSIGN ALL PLACE MARKET IDs AT ONCE AND FILTER TO A DICTIONARY.
+                        _race.assignMarketIDs(marketID.ToList());
                         ExtraPlaceRaces.Add(_race);
                     }
                     else
@@ -100,20 +101,18 @@ namespace GraphQL
                     MessageBox.Show(@event.short_name, e.GetType().Name);
                 }
             }
-
+            
             List<SmarketContract> contracts = await _smarketsClient.GetContracts(ExtraPlaceRaces);
-            var contractDictionary = contracts.ToDictionary(contract => contract.slug, contract => contract.id);
+            // TODO: USE DICTIONARY KEY AS SLUG? -> SLUG IS HORSE NAME BUT MULTIPLE PLACE MARKETS -> SAME KEY -> LIST OF CONTRACTS???
+            Dictionary<string, List<string>> _contractDictionary = new Dictionary<string, List<string>>();
             foreach (Race race in ExtraPlaceRaces)
             {
                 foreach (Horse horse in race.Horses)
                 {
-                    if (contractDictionary.TryGetValue(horse.Name, out var contractId))
+                    List<SmarketContract> _contracts = contracts.Where(x => x.name.Replace(" ", "-").Replace("'", "").ToLower() == horse.Name).ToList();
+                    foreach (var contract in _contracts)
                     {
-                        horse.contractID = contractId;
-                    }
-                    else
-                    {
-                        horse.contractID = contracts.Find(x => x.name.Replace(" ", "-").Replace("'", "").ToLower() == horse.Name).id;
+                        horse.contractIDs.Add(contract.market_id, contract.id);
                     }
                 }
             }
@@ -140,7 +139,8 @@ namespace GraphQL
             epDatagrid.Refresh();
             epDatagrid.SortColumnDescriptions.Clear();
             Task<List<GetBestMatch>> getAllHorses = _apiService.getAllRaceData(SelectedBookmakers);
-            Task<Dictionary<string, QuoteResponse>> getQuotes = _smarketsClient.GetQuotes(race);
+            // TODO: UPDATE THIS TO USE COMBOBOX SELECTION OF PLACES (WHICH WILL BE BASED ON KEYS OF PLACE MARKET DICT FOR THE RACE)
+            Task<Dictionary<string, QuoteResponse>> getQuotes = _smarketsClient.GetQuotes(race, 3);
             await Task.WhenAll(getAllHorses, getQuotes);
 
             List<GetBestMatch> allHorses = getAllHorses.Result;
@@ -149,7 +149,8 @@ namespace GraphQL
             foreach (Horse horse in race.Horses)
             {
                 QuoteResponse horseQuotes = null;
-                bool shouldContinue = horse.contractID != null && quotes.TryGetValue(horse.contractID, out horseQuotes); 
+                // TODO: USE ACTUAL MARKET ID HERE
+                bool shouldContinue = horse.contractIDs != null && quotes.TryGetValue(horse.contractIDs["marketid"], out horseQuotes); 
 
                 GetBestMatch matchingHorse = allHorses.Find(x => x.SelectionId == horse.Name);
                 if (matchingHorse != null)
