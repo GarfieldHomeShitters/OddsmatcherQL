@@ -18,7 +18,7 @@ namespace GraphQL.Datatypes
         public string slug;
         
         [JsonProperty("winner_count", NullValueHandling = NullValueHandling.Ignore)]
-        public int? winner_count;
+        public int winner_count;
     }
     
     public class MarketType
