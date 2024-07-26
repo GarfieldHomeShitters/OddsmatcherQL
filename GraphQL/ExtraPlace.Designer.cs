@@ -39,12 +39,12 @@ namespace GraphQL
             this.label1 = new System.Windows.Forms.Label();
             this.bookmakerCombo = new Syncfusion.WinForms.ListView.SfComboBox();
             this.smarketBtn = new System.Windows.Forms.Button();
-            this.numPlacesNumeric = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            this.placesCombobox = new Syncfusion.WinForms.ListView.SfComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.epRaceCombo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerCombo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPlacesNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.placesCombobox)).BeginInit();
             this.SuspendLayout();
             // 
             // epRaceCombo
@@ -57,6 +57,7 @@ namespace GraphQL
             this.epRaceCombo.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.epRaceCombo.TabIndex = 0;
             this.epRaceCombo.TabStop = false;
+            this.epRaceCombo.SelectedIndexChanged += new System.EventHandler(this.epRaceCombo_SelectedIndexChanged);
             // 
             // loadRacesButton
             // 
@@ -81,9 +82,9 @@ namespace GraphQL
             // 
             // loadDataBtn
             // 
-            this.loadDataBtn.Location = new System.Drawing.Point(261, 57);
+            this.loadDataBtn.Location = new System.Drawing.Point(440, 54);
             this.loadDataBtn.Name = "loadDataBtn";
-            this.loadDataBtn.Size = new System.Drawing.Size(173, 23);
+            this.loadDataBtn.Size = new System.Drawing.Size(105, 23);
             this.loadDataBtn.TabIndex = 3;
             this.loadDataBtn.Text = "Load Race Data";
             this.loadDataBtn.UseVisualStyleBackColor = true;
@@ -126,7 +127,7 @@ namespace GraphQL
             // 
             // smarketBtn
             // 
-            this.smarketBtn.Location = new System.Drawing.Point(440, 57);
+            this.smarketBtn.Location = new System.Drawing.Point(551, 54);
             this.smarketBtn.Name = "smarketBtn";
             this.smarketBtn.Size = new System.Drawing.Size(96, 23);
             this.smarketBtn.TabIndex = 7;
@@ -134,19 +135,16 @@ namespace GraphQL
             this.smarketBtn.UseVisualStyleBackColor = true;
             this.smarketBtn.Click += new System.EventHandler(this.smarketBtn_Click);
             // 
-            // numPlacesNumeric
+            // placesCombobox
             // 
-            this.numPlacesNumeric.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
-            this.numPlacesNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numPlacesNumeric.Location = new System.Drawing.Point(990, 60);
-            this.numPlacesNumeric.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
-            this.numPlacesNumeric.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
-            this.numPlacesNumeric.Name = "numPlacesNumeric";
-            this.numPlacesNumeric.Size = new System.Drawing.Size(120, 20);
-            this.numPlacesNumeric.TabIndex = 8;
-            this.numPlacesNumeric.ThemeName = "Metro";
-            this.numPlacesNumeric.Value = new decimal(new int[] { 3, 0, 0, 0 });
-            this.numPlacesNumeric.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            this.placesCombobox.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
+            this.placesCombobox.Location = new System.Drawing.Point(261, 54);
+            this.placesCombobox.Name = "placesCombobox";
+            this.placesCombobox.Size = new System.Drawing.Size(173, 23);
+            this.placesCombobox.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.placesCombobox.TabIndex = 8;
+            this.placesCombobox.TabStop = false;
+            this.placesCombobox.ThemeName = "Metro";
             // 
             // ExtraPlace
             // 
@@ -154,7 +152,7 @@ namespace GraphQL
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1122, 626);
-            this.Controls.Add(this.numPlacesNumeric);
+            this.Controls.Add(this.placesCombobox);
             this.Controls.Add(this.smarketBtn);
             this.Controls.Add(this.bookmakerCombo);
             this.Controls.Add(this.label1);
@@ -170,11 +168,11 @@ namespace GraphQL
             ((System.ComponentModel.ISupportInitialize)(this.epDatagrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stakeNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerCombo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPlacesNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.placesCombobox)).EndInit();
             this.ResumeLayout(false);
         }
 
-        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt numPlacesNumeric;
+        private Syncfusion.WinForms.ListView.SfComboBox placesCombobox;
 
         private System.Windows.Forms.Button smarketBtn;
 
