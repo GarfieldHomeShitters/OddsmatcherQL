@@ -37,12 +37,12 @@ namespace System.Linq
         {
             if (source is null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
+                throw new ArgumentNullException();
             }
 
             if (size < 1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.size);
+                throw new ArgumentOutOfRangeException();
             }
 
             if (source is TSource[] array)
