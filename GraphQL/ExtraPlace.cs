@@ -84,7 +84,7 @@ namespace GraphQL
                     string eventName = @event.short_name.Replace("@ ", "");
                     Race _race = new Race(eventName, @event.id);
                     _race.addHorses(epRaceMatches.Where(x => x.EventName == eventName).ToList());
-                    var marketID = placeMarkets.Where(x => x.event_id == _race.EventID && int.Parse(x.market_type.param) == (int)numPlacesNumeric.Value);
+                    var marketID = placeMarkets.Where(x => x.event_id == _race.EventID);
                     if (marketID != null)
                     {
                         // ASSIGN ALL PLACE MARKET IDs AT ONCE AND FILTER TO A DICTIONARY.
@@ -103,8 +103,9 @@ namespace GraphQL
             }
             
             List<SmarketContract> contracts = await _smarketsClient.GetContracts(ExtraPlaceRaces);
+            // vvvvvvv Not necessarily needed but will ensure that there is less performance hit. vvvvvvv
             // TODO: USE DICTIONARY KEY AS SLUG? -> SLUG IS HORSE NAME BUT MULTIPLE PLACE MARKETS -> SAME KEY -> LIST OF CONTRACTS???
-            Dictionary<string, List<string>> _contractDictionary = new Dictionary<string, List<string>>();
+            // Dictionary<string, List<string>> _contractDictionary = new Dictionary<string, List<string>>();
             foreach (Race race in ExtraPlaceRaces)
             {
                 foreach (Horse horse in race.Horses)
@@ -139,8 +140,8 @@ namespace GraphQL
             epDatagrid.Refresh();
             epDatagrid.SortColumnDescriptions.Clear();
             Task<List<GetBestMatch>> getAllHorses = _apiService.getAllRaceData(SelectedBookmakers);
-            // TODO: UPDATE THIS TO USE COMBOBOX SELECTION OF PLACES (WHICH WILL BE BASED ON KEYS OF PLACE MARKET DICT FOR THE RACE)
-            Task<Dictionary<string, QuoteResponse>> getQuotes = _smarketsClient.GetQuotes(race, 3);
+            int places = int.Parse(placesCombobox.SelectedItem.ToString());
+            Task<Dictionary<string, QuoteResponse>> getQuotes = _smarketsClient.GetQuotes(race, places);
             await Task.WhenAll(getAllHorses, getQuotes);
 
             List<GetBestMatch> allHorses = getAllHorses.Result;
@@ -149,8 +150,8 @@ namespace GraphQL
             foreach (Horse horse in race.Horses)
             {
                 QuoteResponse horseQuotes = null;
-                // TODO: USE ACTUAL MARKET ID HERE
-                bool shouldContinue = horse.contractIDs != null && quotes.TryGetValue(horse.contractIDs["marketid"], out horseQuotes); 
+                string contractID = horse.contractIDs[race.MarketIDs[places]];
+                bool shouldContinue = horse.contractIDs != null && quotes.TryGetValue(contractID, out horseQuotes); 
 
                 GetBestMatch matchingHorse = allHorses.Find(x => x.SelectionId == horse.Name);
                 if (matchingHorse != null)
@@ -188,6 +189,14 @@ namespace GraphQL
         private void smarketBtn_Click(object sender, EventArgs e)
         {
             Process.Start((epRaceCombo.SelectedItem as Race).link);
+        }
+
+        private void epRaceCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            placesCombobox.DataSource = null;
+            placesCombobox.Refresh();
+            placesCombobox.DataSource = (epRaceCombo.SelectedItem as Race).MarketIDs.Keys;
+            placesCombobox.Refresh();
         }
     }
 }
