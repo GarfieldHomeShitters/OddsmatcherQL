@@ -7,7 +7,7 @@ namespace GraphQL.Datatypes
     {
         public string EventName;
         public List<Horse> Horses;
-        public string MarketID;
+        public Dictionary<int, string> MarketIDs;
         public string EventID;
         public string link;
 
@@ -16,6 +16,7 @@ namespace GraphQL.Datatypes
             EventName = eventName;
             EventID = eventId;
             Horses = new List<Horse>();
+            MarketIDs = new Dictionary<int, string>();
             link = $"https://smarkets.com/event/{eventId}";
         }
 
@@ -29,9 +30,16 @@ namespace GraphQL.Datatypes
             }
         }
 
-        public void assignMarketID(SmarketMarket market)
+        private void assignMarketID(int places, SmarketMarket market)
         {
-            MarketID = market.id;
+            MarketIDs.Add(places, market.id);
+        }
+
+        public void assignMarketIDs(List<SmarketMarket> markets)
+        {
+            // Shouldn't be an issue but just make sure that all the entries are clear.
+            MarketIDs.Clear();
+            foreach (var market in markets) assignMarketID(market.winner_count, market);
         }
         
         public override string ToString()
