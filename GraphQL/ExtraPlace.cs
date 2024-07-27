@@ -22,9 +22,9 @@ namespace GraphQL
         private readonly APIService _apiService;
         private readonly SmarketsClient _smarketsClient;
         private string[] SelectedBookmakers;
-        private List<Race> ExtraPlaceRaces = new List<Race>();
+        private List<Race> ExtraPlaceRaces = new();
         private string[] Bookmakers;
-        private List<HorseExtraPlace> horseExtra = new List<HorseExtraPlace>();
+        private List<HorseExtraPlace> horseExtra = new();
 
         public ExtraPlace(APIService apiService)
         {
@@ -90,10 +90,6 @@ namespace GraphQL
                         // ASSIGN ALL PLACE MARKET IDs AT ONCE AND FILTER TO A DICTIONARY.
                         _race.assignMarketIDs(marketID.ToList());
                         ExtraPlaceRaces.Add(_race);
-                    }
-                    else
-                    {
-                        MessageBox.Show(eventName);
                     }
                 }
                 catch (Exception e)
