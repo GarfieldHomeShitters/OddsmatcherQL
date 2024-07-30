@@ -57,6 +57,7 @@
             this.tblMatchedResults = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.applyFilterBtn = new System.Windows.Forms.Button();
             this.loadEPMatcher = new System.Windows.Forms.Button();
+            this.excludeDrawCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).BeginInit();
             this.panel1.SuspendLayout();
@@ -145,6 +146,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.excludeDrawCheckbox);
             this.panel1.Controls.Add(this.maxStartDate);
             this.panel1.Controls.Add(this.minStartDate);
             this.panel1.Controls.Add(this.selectAllBtn);
@@ -182,6 +184,7 @@
             this.maxStartDate.TabIndex = 22;
             this.maxStartDate.ThemeName = "Office2016DarkGray";
             this.maxStartDate.ToolTipText = "Max Start Date";
+            this.maxStartDate.Value = new System.DateTime(2024, 7, 26, 0, 0, 0, 0);
             // 
             // minStartDate
             // 
@@ -195,6 +198,7 @@
             this.minStartDate.TabIndex = 21;
             this.minStartDate.ThemeName = "Office2016DarkGray";
             this.minStartDate.ToolTipText = "Min Start Date";
+            this.minStartDate.Value = new System.DateTime(2024, 7, 26, 0, 0, 0, 0);
             // 
             // selectAllBtn
             // 
@@ -456,6 +460,16 @@
             this.loadEPMatcher.UseVisualStyleBackColor = true;
             this.loadEPMatcher.Click += new System.EventHandler(this.loadEPMatcher_Click);
             // 
+            // excludeDrawCheckbox
+            // 
+            this.excludeDrawCheckbox.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.excludeDrawCheckbox.Location = new System.Drawing.Point(880, 34);
+            this.excludeDrawCheckbox.Name = "excludeDrawCheckbox";
+            this.excludeDrawCheckbox.Size = new System.Drawing.Size(84, 30);
+            this.excludeDrawCheckbox.TabIndex = 23;
+            this.excludeDrawCheckbox.Text = "Exclude Draw";
+            this.excludeDrawCheckbox.UseVisualStyleBackColor = true;
+            // 
             // Oddsmatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,7 +485,7 @@
             this.Controls.Add(this.configSelection);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Oddsmatcher";
-            this.Text = "Form1";
+            this.Text = "Oddsmatcher";
             this.Load += new System.EventHandler(this.Oddsmatcher_Load);
             ((System.ComponentModel.ISupportInitialize)(this.multiBookmaker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minOddsNumeric)).EndInit();
@@ -486,6 +500,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tblMatchedResults)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.CheckBox excludeDrawCheckbox;
 
         private Syncfusion.WinForms.Input.SfDateTimeEdit minStartDate;
 
