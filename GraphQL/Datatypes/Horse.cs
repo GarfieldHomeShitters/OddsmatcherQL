@@ -17,6 +17,7 @@ namespace GraphQL.Datatypes
             this.Name = Name;
             this.backOdds = backOdds;
             this.layOdds = layOdds;
+            contractIDs = new Dictionary<string, string>();
             backPlaceOdds = ((this.backOdds - 1) / 5) + 1;
         }
 
