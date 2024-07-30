@@ -82,7 +82,7 @@ namespace GraphQL
             updateSelections();
 
             // Get Unfiltered Results
-            GetBestMatch[] apiResponse = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked);
+            GetBestMatch[] apiResponse = await ApiService.FetchAPIData(selectedBookmakers, selectedSports, minOddsNumeric.Value, maxOddsNumeric.Value, minRatingNumeric.Value, maxRatingNumeric.Value, snrCheck.Checked, excludeDraws: excludeDrawCheckbox.Checked);
             unfilteredMatchedEvents = new List<MatchedEvent>();
             foreach (GetBestMatch bestMatch in apiResponse)
             {
