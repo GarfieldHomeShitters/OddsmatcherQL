@@ -40,7 +40,7 @@ namespace GraphQL.API
             GraphQlClient = new GraphQLHttpClient("https://api.oddsplatform.profitaccumulator.com/graphql", new NewtonsoftJsonSerializer(), client);
         }
 
-        public async Task<GetBestMatch[]> FetchAPIData(string[] Bookmakers, string[] Sports, decimal minOdds, decimal maxOdds, decimal minRating, decimal maxRating, bool snr, int skip = 0, bool todayOnly = false, int limit = 100)
+        public async Task<GetBestMatch[]> FetchAPIData(string[] Bookmakers, string[] Sports, decimal minOdds, decimal maxOdds, decimal minRating, decimal maxRating, bool snr, int skip = 0, bool todayOnly = false, int limit = 100, bool excludeDraws = false)
         {
             string defaultQueryVariables = File.ReadAllText("X:\\Projects\\MatchedBetting\\GraphQL\\GraphQL\\Configs\\AllBookmakers.json");
             Dictionary<string, object> _Variables = JsonConvert.DeserializeObject<Dictionary<string, object>>(defaultQueryVariables);
@@ -62,6 +62,13 @@ namespace GraphQL.API
             {
                 _Variables["timeframeStart"] = DateTime.Today.ToString("yyyy-MM-ddTHH:mm:sszzz");
                 _Variables["timeframeEnd"] = DateTime.Today.AddDays(1).AddMinutes(-25).ToString("yyyy-MM-ddTHH:mm:sszzz");
+            }
+
+            if (excludeDraws)
+            {
+                _Variables["excludeDraw"] = true;
+                _Variables["permittedMarketGroups"] = new List<string>{"match-odds"};
+                // "permittedMarketGroups": ["win-market","match-odds","over-under","half-time-full-time","correct-score","both-teams-to-score"]
             }
 
             GraphQLRequest APIRequest = new GraphQLRequest
